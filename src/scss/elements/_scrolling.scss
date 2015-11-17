@@ -1,0 +1,18 @@
+// =============================================================================
+// Scrolling
+// Apply to a div to enable scrolling
+// See: http://css-tricks.com/snippets/css/momentum-scrolling-on-ios-overflow-elements/
+// See also: http://barrow.io/overflow-scrolling
+//
+// =============================================================================
+
+
+.scrollable {
+    overflow-y: scroll;
+    // momentum scrolling
+    -webkit-overflow-scrolling: touch;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}

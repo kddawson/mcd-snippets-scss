@@ -1,0 +1,70 @@
+// =============================================================================
+// Accessible, responsive modal window
+// See: http://accessibility.oit.ncsu.edu/blog/2014/01/02/incredible-accessible-modal-window-version-2/
+// and: https://github.com/gdkraus/accessible-modal-dialog
+//
+// HTML Emmet pattern
+// div#modalOverlay.modal-overlay[tabindex="-1"]+div#modal.modal[aria-hidden="true"][aria-labelledby="modalTitle"][aria-describedby="modalDescription"][role="dialog"]>button[type="button"]#modalClose+p#modalDescription.modal__description.vis-hide+h1#modalTitle.modal__title+div.modal__inner
+//
+// Use with js/jquery.accessible-modal.js
+//
+// Demo: http://codepen.io/multicelldesign/pen/dYJLNj
+//
+// =============================================================================
+
+$modal-bg: #fff;
+$modal-border: #000;
+
+
+.modal {
+    position: fixed;
+    // adjust a value to gain an offset
+    top: 25%;
+    left: 25%;
+    overflow: auto;
+    margin: auto;
+    padding: 0.5em;
+    @include square(50%);
+    max-height: 100%;
+    background-color: $modal-bg;
+    border: 1px solid $modal-border;
+    transform: scale(0.1);
+    transition: transform 0.2s ease;
+
+    &[aria-hidden="true"] {
+        z-index: -1100;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &[aria-hidden="false"] {
+        z-index: 1100;
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    // places the modal-overlay between the main page and the modal dialog
+    z-index: -1000;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    @include square(100%);
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    transform: scale(0.5);
+    transition: transform 0.3s ease;
+
+    &.jsModalVisible {
+        z-index: 1000;
+        opacity: 1;
+        visibility: visible;
+        transform: scale(2);
+    }
+}

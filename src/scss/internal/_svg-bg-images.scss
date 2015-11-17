@@ -1,0 +1,41 @@
+// =============================================================================
+// SVG background images with .png fallback
+// See: https://css-tricks.com/a-complete-guide-to-svg-fallbacks/
+//
+// =============================================================================
+
+
+$svg-path: '../../svg' !default;
+$fallback-path: '../../img' !default;
+$fallback-extension: 'png' !default;
+
+
+/// SVG background images.
+/// @group images
+/// @access public
+///
+/// @param {string} $name - filename of the svg (and Gulp-generated png).
+/// @param {number} $size [contain] - Optional. Actual .png size / 2 to provide high DPI (retina) quality.
+/// @example scss
+///     .example {
+///         @include svg-background-image('pattern', 50px 30px);
+///     }
+///
+/// @example css
+///     .example {
+///         background: url(../../img/pattern.png);
+///         background: url(../../svg/pattern.svg), linear-gradient(transparent, transparent);
+///         background-repeat: no-repeat;
+///         background-size: 50px 30px;
+///     }
+///
+
+@mixin svg-background-image($name, $size: contain){
+    background: url(#{$fallback-path}/#{$name}.#{$fallback-extension});
+    background: url(#{$svg-path}/#{$name}.svg), linear-gradient(transparent, transparent);
+    background-repeat: no-repeat;
+
+    @if($size){
+        background-size: $size;
+    }
+}

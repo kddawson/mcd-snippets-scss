@@ -1,0 +1,104 @@
+// =============================================================================
+// Checkbox / radio button styling
+//
+// HTML Emmet pattern
+// label.checkbox-label-group>(input[type=checkbox]+span.form-control.checkbox{checkbox})
+//
+// =============================================================================
+
+
+.checkbox-label-group {
+    line-height: 1;
+    cursor: pointer;
+    @extend %user-select;
+
+    > [type=checkbox],
+    > [type=radio] {
+        @include vis-hide;
+        min-height: 1px;
+    }
+
+
+    .form-control {
+        display: inline-block;
+        position: relative;
+        padding-left: 1.3em;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+
+        &::before {
+            @include square(1em);
+            border: 0.1em solid;
+        }
+
+        &::after {
+            top: 0.1em;
+            left: 0.2em;
+            @include square(0.8em);
+        }
+
+        // Checkbox
+        &.checkbox {
+
+            &::before {
+                border-radius: 0.1em;
+            }
+
+            &::after {
+                content: "\2714";
+                opacity: 0;
+                line-height: 1em;
+                text-align: center;
+                transform: scale(0.5);
+                transition: transform 0.1s ease;
+            }
+
+            &:hover::after,
+            &:focus::after,
+            &:active::after {
+                opacity: 0.4;
+            }
+        }
+
+        // Radio
+        &.radio {
+
+            &::before,
+            &::after {
+                border-radius: 50%;
+            }
+
+            &::after {
+                top: 0;
+                left: 0;
+                @include square(1em);
+                background-color: currentColor; // inherits color from label text color
+                background-clip: padding-box;
+                border: 0.1em solid transparent;
+                opacity: 0;
+                transition: border 0.1s ease;
+            }
+
+            &:hover::after,
+            &:focus::after,
+            &:active::after {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    > input:checked + .form-control.checkbox::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    > input:checked + .form-control.radio::after {
+        border-width: 0.1em;
+        opacity: 1;
+    }
+}

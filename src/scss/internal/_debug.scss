@@ -1,0 +1,82 @@
+// =============================================================================
+// Debug
+// Development-only styles highlighting vulnerabilities and accessibility issues
+//
+// =============================================================================
+
+
+/// When _debug.scss is included in the Sass build, this will provide styles highlighting vulnerabilities and accessibility issues.
+/// @access private
+///
+
+%debug-alert {
+    padding: 4px;
+    color: #fff;
+    background-color: #f00;
+}
+
+form button:not([type]):after {
+    content: "Warning: button is missing a [type] attribute. Is it a submit, reset or button?";
+    @extend %debug-alert;
+}
+
+.btn:not(button):after {
+    content: "Warning: You are making an element look like a button here. Is it really a button?";
+    @extend %debug-alert;
+}
+
+// WTF?
+// 1. Disable buttons with the disabled attribute, not a class
+// 2. Disable anchors by removing the href, not with a class
+button.disabled:not([disabled]):after,
+a.disabled[href]:after {
+    content: 'Warning: It looks like you are styling an element to be disabled here. Make sure it is disabled properly.';
+    @extend %debug-alert;
+}
+
+
+// WTF?
+// 1. If the button has no content at all and also has no accessible ARIA label, display a warning
+// 2. If there is some content inside the button and it's just an image and that image doesn't have an alt attibute, display a warning
+//
+// Use the button pattern with a text node and/or the accessible icon
+a:empty:not([aria-label]):not([aria-labelledby]):after,
+button:empty:not([aria-label]):not([aria-labelledby]):after,
+button:not([aria-label]):not([aria-labelledby]) img:only-child:not([alt]):after,
+a:not([aria-label]):not([aria-labelledby]) img:only-child:not([alt]):after {
+    content: 'You are not providing enough information about what this button does. Please include some text within the button.';
+    @extend %debug-alert;
+}
+
+section > section:first-child:after {
+    content: 'Warning: it looks like you are using sections like divs. Sections should each have a heading';
+    @extend %debug-alert;
+}
+
+.tab:not([role="tab"]):after {}
+
+[role="tablist"] a:not([role="tab"]):after {
+    content: 'Warning: All links inside a tablist should be defined as tabs, using the tab ARIA role';
+    @extend %debug-alert;
+}
+
+[role="tabpanel"]:not([id]):after {
+    content: 'Warning: Each tabpanel should be identified with an id attribute';
+    @extend %debug-alert;
+}
+
+[role="tab"]:not([aria-controls]):after {
+    content: 'Warning: Each tab should explicitly control a tabpanel using the aria-controls attribute';
+    @extend %debug-alert;
+}
+
+[role="status"]:not([aria-live="polite"]),
+[role="alert"]:not([aria-live="assertive"]) {
+    content: 'Warning: For better support, you should include a politeness setting for your live region role using the aria-live attribute';
+    @extend %debug-alert;
+}
+[aria-live="polite"]:not([role="status"]),
+[aria-live="assertive"]:not([role="alert"]) {
+    content: 'Warning: For better support, you should include a corresponding role for your aria-live politeness setting';
+    @extend %debug-alert;
+}

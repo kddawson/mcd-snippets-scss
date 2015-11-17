@@ -1,0 +1,85 @@
+// =============================================================================
+// Card
+// A UI component that contains related data - such as a photo, some text and a link
+//
+// HTML Emmet pattern
+// div.card>div.card__title>div.card__title--text^div.card__media+div.card__text+div.card__actions
+//
+// =============================================================================
+
+
+$card-z-index: 1;
+$card-min-height: 300px;
+$card-width: 50%;
+$card-background-color: #fff;
+$card-image-placeholder-color: #fff;
+$card-border-color: #ccc;
+
+.card {
+    position: relative;
+    z-index: $card-z-index;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: $card-width;
+    min-height: $card-min-height;
+    background-color: $card-background-color;
+    border-radius: 2px;
+    box-sizing: border-box;
+
+    .no-flexbox & {}
+}
+
+.card__title {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    box-sizing: border-box;
+    padding: 0.5em;
+
+    &.card--border {
+        border-bottom: 1px solid $card-border-color;
+    }
+}
+
+.card__title-text {
+    display: block;
+    display: flex;
+    align-self: flex-end;
+    overflow: hidden;
+}
+
+.card__media {
+    margin: 0 auto;
+    background-color: $card-image-placeholder-color;
+    background-repeat: repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-origin: padding-box;
+    background-attachment: scroll;
+    box-sizing: border-box;
+}
+
+.card__text {
+    padding: 0.5em;
+}
+
+.card__actions {
+    box-sizing: border-box;
+    padding: 0.5em 0.5em 1em;
+
+    &.card--border {
+        border-top: 1px solid $card-border-color;
+    }
+}
+
+.card__menu {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
+.card--expand {
+    flex-grow: 1;
+}

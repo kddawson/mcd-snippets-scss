@@ -1,0 +1,32 @@
+// =============================================================================
+// Accessible help text as tooltips
+//
+// HTML Emmet pattern
+// input[aria-describedby="id"]+div#id[role="tooltip"]
+// =============================================================================
+
+
+[role="tooltip"] {
+    display: none;      // invisible on screen and to screen readers
+    padding: 0.25em;
+    background: #000;
+    color: #fff;
+}
+
+fieldset {
+    position: relative;
+
+    > input:focus + [role="tooltip"] {
+        display: inline-block;
+        position: absolute;
+        bottom: -1.25em;
+        left: 0;
+        z-index: 2;
+    }
+
+    &.aligned-inputs {
+        input:focus + [role="tooltip"] {
+            display: inline-block;
+        }
+    }
+}

@@ -1,0 +1,48 @@
+// =============================================================================
+// Floated label pattern
+// See: http://bradfrostweb.com/blog/post/float-label-pattern/
+// See: http://snook.ca/archives/html_and_css/floated-label-pattern-css (Caveats)
+//
+// HTML Emmet pattern
+// div.field>input[type="text"][pattern=".+"][placeholder="placeholder"]+label
+//
+// =============================================================================
+
+
+.field {
+    display: inline-block;
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transition: all 0.2s linear;
+    }
+
+    input {
+        position: relative;
+        z-index: 2;
+        margin-top: 1em;
+        padding: 0.2em 0.125em;
+
+        &:invalid + label {
+            top: 0.8125em;
+            opacity: 0;
+        }
+
+        &:valid + label {
+            top: 0.8125em;
+            opacity: 1;
+        }
+
+        &:focus {
+            outline: none;
+
+            + label {
+                top: -0.625em;
+            }
+        }
+    }
+}

@@ -1,3 +1,12 @@
+# =========================
+# Project files
+# =========================
+bower_components
+dist
+node_modules
+sassdoc
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

@@ -1,0 +1,109 @@
+// -----------------------------------------------------------------------------
+// Variables
+//
+// -----------------------------------------------------------------------------
+
+
+// Colors
+// =============================================================================
+
+$blue: blue;
+
+$btn-primary-bg: $blue;
+
+
+// Global sizing
+// =============================================================================
+
+/// Base pixel font size. Used as a default for px -> (r)em conversions.
+/// @group typography
+/// @access public
+
+$base-font-size: 16;
+
+/// Base line height. In pixels, but kept unitless for downstream calculations.
+/// @group typography
+/// @access public
+
+$base-line-height: 24;
+
+/// Base spacing size (in pixels). Converted to ems and further divided by 2 and 4 for onward use in _spacing.scss.
+/// @group dimensions and position
+/// @access private
+
+$base-spacing: 16;
+
+$spacing: ($base-spacing / $base-font-size) * 1em;
+
+$h-space: $spacing / 2;
+$q-space: $spacing / 4;
+
+
+// -----------------------------------------------------------------------------
+// Lists and maps
+//
+// -----------------------------------------------------------------------------
+
+/// Map for breakpoint sizes used in _media-queries.scss.
+/// @access public
+/// @see {mixin} mq
+
+$breakpoints: (
+    's-port': 320,
+    's-land': 480,
+    'm-land': 768,
+    'desktop': 976,
+    'l-screen': 1328,
+);
+
+
+/// Map for button sizes used in _buttons.scss.
+/// @access private
+
+$btn-sizes: (
+    'small': 12,
+    'med': 24,
+    'large': 32,
+);
+
+
+/// Map for button types used in _buttons.scss.
+/// @access private
+
+$btn-types: (
+    'primary' : $blue,
+    'default' : grey,
+);
+
+
+/// Map for icon sizes used in _icons.scss.
+/// @group images
+/// @access private
+
+$icon-sizes: (
+    'small': 12,
+    'med': 24,
+    'large': 32,
+);
+
+
+/// Map for icon types used in _icons.scss.
+/// @group images
+/// @access private
+
+$icon-types: (
+    'home': "\e600",
+    'arrow': "\e600",
+);
+
+
+/// Map for position used in _spacing.scss.
+/// @group dimensions and position
+/// @access private
+
+$positions: (
+    't': top,
+    'r': right,
+    'b': bottom,
+    'l': left,
+);

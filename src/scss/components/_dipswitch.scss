@@ -1,0 +1,96 @@
+// =============================================================================
+// Dipswitch-style radio buttons
+//
+// =============================================================================
+$dipswitch-size: 20px;
+$dipswitch-on: red;
+$dipswitch-off: #fff;
+
+
+// div.dipswitch-block>span#dip-1.vis-hide{dip-1}+div.radio[aria-labelledby=dip-1]>label>input[type=radio][value=1].dip-switch[data-bind="checked:value,attr:{name:sequence}"]+span.vis-hide{On}^^+div.radio[aria-labelledby=dip-1]>label>input[type=radio][value=0].dip-switch[data-bind="checked:value,attr:{name:sequence}"]+span.vis-hide{Off}
+//
+// =============================================================================
+
+.dipswitch-block {
+    display: inline-block;
+
+    .radio {
+        margin: 0;
+    }
+}
+
+.dip-switch {
+    position: relative;
+    @include square($dipswitch-size);
+
+    &::after {
+        content: "";
+        display: block;
+        @include square($dipswitch-size);
+        background-color: $dipswitch-off;
+    }
+
+    &:checked::after {
+        background-color: $dipswitch-on;
+    }
+}
+
+
+// Read-only version
+// div.dipswitch-block--readonly>span.dip-switch--readonly[data-bind="attr:{title: value}"]>span.vis-hide[data-bind="text: value"]
+// data-bind a value (eg Off or On) to the title attr and content
+//
+// =============================================================================
+
+.dipswitch-block--readonly {
+    min-height: $dipswitch-size * 2;
+
+    &.show-labels {
+
+        .dip-switch--readonly {
+            margin-right: $dipswitch-size * 2;
+
+            // remember to remove .vis-hide
+            > span {
+                position: absolute;
+                top: 0;
+                left: 24px;
+            }
+        }
+    }
+}
+
+.dip-switch--readonly {
+    position: relative;
+    display: inline-block;
+    margin-right: $dipswitch-size / 2;
+    margin-bottom: $dipswitch-size * 3;
+    @include square($dipswitch-size);
+    background-color: $dipswitch-on;
+
+    &::before,
+    &::after {
+        content: "";
+        position: relative;
+        display: block;
+        @include square($dipswitch-size);
+    }
+
+    // Off
+    &[title="Off"] {
+        top: $dipswitch-size;
+
+        &::before {
+            top: -$dipswitch-size;
+            background-color: $dipswitch-off;
+        }
+    }
+
+    // On
+    &[title="On"] {
+
+        &::after {
+            background-color: $dipswitch-off;
+        }
+    }
+}

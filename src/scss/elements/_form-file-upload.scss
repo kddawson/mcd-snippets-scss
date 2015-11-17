@@ -1,0 +1,41 @@
+// =============================================================================
+// File upload
+// See: http://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+//
+// HTML Emmet pattern
+// input[type="file"]#fileUpload.jsFileUpload[data-multiple-caption="{count} files selected"]+label[for="fileUpload"]>span.jsFileName{Upload file(s)}
+//
+// Use with jquery.form-file-upload.js
+//
+// =============================================================================
+
+
+[type="file"] {
+    @include vis-hide;
+
+    + label {
+        display: inline-block;
+        padding: 0.5em 1em;
+        color: #fff;
+        background-color: #000;
+        cursor: pointer;
+
+        &:hover {
+            color: #fff;
+            background-color: red;
+        }
+    }
+
+    &.fileupload-has-focus + label, // class added via JS to overcome a Firefox bug
+    &:focus + label {
+        color: #fff;
+        background-color: red;
+        outline: 1px dotted #000;
+        outline: -webkit-focus-ring-color auto 5px;
+
+        // Touch issue with any nested elements
+        * {
+            pointer-events: none;
+        }
+    }
+}

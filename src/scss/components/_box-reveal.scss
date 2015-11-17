@@ -1,0 +1,93 @@
+// =============================================================================
+// Box reveal
+//
+// Overlay a transparent img on a bg image and reveal a content box on hover
+//
+// HTML Emmet pattern
+// div.box-reveal>a>h2.box-reveal__title+div.box-reveal__img>div.box-reveal__img-bg+div.box-reveal__tint+img^div.box-reveal__content
+//
+// =============================================================================
+
+
+$boxreveal-height: 262px;
+
+
+.box-reveal {
+    position: relative;
+    overflow: hidden;
+    margin: 1em 0;
+    min-height: $boxreveal-height;
+    height: $boxreveal-height;
+
+    &:hover {
+
+        .box-reveal__img-bg {
+            background-position-y: -10px;
+        }
+
+        .box-reveal__tint {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .box-reveal__img > img {
+            top: 40%;
+        }
+    }
+}
+
+.box-reveal__title {
+
+    &.no-logo {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        color: #fff;
+    }
+}
+
+.box-reveal__img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+
+    > img {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        margin: 0 auto;
+        transform: translate(-50%, -50%);
+        transition: all 0.3s ease-in;
+    }
+}
+
+.box-reveal__tint {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.3s ease-in;
+}
+
+.box-reveal__img-bg {
+    height: $boxreveal-height;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transition: all 0.3s ease-in;
+}
+
+.box-reveal__content {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    z-index: 2;
+    padding: 15px;
+    color: #fff;
+    background-color: #000;
+}

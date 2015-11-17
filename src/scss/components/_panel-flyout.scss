@@ -1,0 +1,144 @@
+// =============================================================================
+// Flyout panel (left or right)
+//
+// HTML Emmet pattern
+// button[type="button"]#flyoutToggle.btn.btn--flyout+div#panelFlyout.panel-flyout.panel-flyout--right>div.panel-flyout__inner
+//
+// Use with js/jquery.panel-flyout.js
+//
+// =============================================================================
+
+
+// Settings
+// =============================================================================
+$position-offscreen: -320px;
+$position-onscreen: 0;
+$panel-bgcolor: #000;
+$panel-width: 320px;
+$panel-height: 100%;
+$panel-speed: 0.3s;
+$direction: right;
+$arrow-size: 32px;
+$one: $arrow-size / 16;
+
+
+// Styles
+// =============================================================================
+@mixin panel-flyout {
+    position: fixed;
+    top: 0;
+    z-index: 300;
+    @include size($panel-width, $panel-height);
+    color: contrast($panel-bgcolor);
+    background-color: $panel-bgcolor;
+    transform: translate3d(0, 0, 0);
+    transition: all, $panel-speed, ease-in;
+
+    ~ .panel--breadcrumb,
+    ~ [role="main"],
+    ~ [role="contentinfo"] {
+        transition: all $panel-speed;
+    }
+}
+
+@mixin flyout-dir($direction) {
+    #{$direction}: $position-offscreen;
+
+    &.panel-open {
+        #{$direction}: $position-onscreen;
+
+        ~ [role="main"],
+        ~ [role="contentinfo"] {
+            margin-#{$direction}: $panel-width;
+
+            // on small screens, glide the panel over the top of the content
+            @include mq(desktop, max) {
+                margin-#{$direction}: 0;
+            }
+        }
+    }
+}
+
+.panel-flyout {
+    @include panel-flyout;
+}
+
+.panel-flyout--#{$direction} {
+    @include flyout-dir($direction);
+}
+
+.panel-flyout__inner {
+    padding: 4em 1em 0;
+}
+
+
+// Button styles
+// =============================================================================
+
+.btn--flyout {
+    position: absolute;
+    top: 0.5em;
+    #{$direction}: 0.5em;
+    z-index: 400;
+    @include square($arrow-size);
+    background-color: #000;
+    border: none;
+
+    .line {
+        position: absolute;
+        top: 0;
+        @if $direction == right {
+            left: $arrow-size / 2 - $one * 4.5;
+        } @else {
+            right: $arrow-size / 2 - $one * 4.5;
+        }
+        width: $one * 9;
+        height: $one;
+        background: #fff;
+        transition: all 0.3s ease-out;
+
+        &:first-child {
+            top: $one * 5;
+        }
+
+        &:nth-child(2) {
+            // top of 1st line + line thickness + gap
+            top: $one * 5 + $one + $one * 1.5;
+        }
+
+        &:nth-child(3) {
+            // top of 1st line + (2*line thickness) + (2*gap)
+            top: $one * 5 + $one * 2 + $one * 1.5 * 2;
+        }
+    }
+
+    &.flyout-open {
+        outline: none;
+
+        .line:first-child {
+            width: $one * 5.5;
+            @if $direction == right {
+                left: 5px;
+                transform: translate($one * 0.5, $one) rotate(-45deg);
+
+            } @else {
+                transform: translate($one * 0.5, $one) rotate(45deg);
+            }
+        }
+
+        .line:nth-child(2) {
+            margin-#{$direction}: $one * 1.75;
+            width: $one * 6.5;
+        }
+
+        .line:nth-child(3) {
+            width: $one * 5.5;
+            @if $direction == right {
+                left: 5px;
+                transform: translate($one * 0.5, -$one) rotate(45deg);
+            } @else {
+                transform: translate($one * 0.5, -$one) rotate(-45deg);
+            }
+        }
+    }
+}

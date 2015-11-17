@@ -1,0 +1,264 @@
+// -----------------------------------------------------------------------------
+// CSS Shapes
+// See: https://github.com/ilanbiala/CSS-Shapes
+//
+// -----------------------------------------------------------------------------
+// 1. Rectangle
+// 2. Parallelogram
+// 3. Circle
+// 4. Oval
+// 5. Triangle
+// 6. Corner-triangle
+// 7. Trapezoid
+// 8. Chevron
+
+
+// -----------------------------------------------------------------------------
+// 1. Rectangle
+// -----------------------------------------------------------------------------
+
+/// CSS rectangle.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {number} $width
+/// @param {number} $height
+/// @param {string} $color
+/// @example scss
+///   .rectangle {
+///     @include rectangle(100px, 40px, red);
+///   }
+///
+
+@mixin rectangle($width, $height, $color) {
+    width: $width;
+    height: $height;
+    background-color: $color;
+}
+
+
+// -----------------------------------------------------------------------------
+// 2. Parallelogram
+// -----------------------------------------------------------------------------
+
+/// CSS parallelogram.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {number} $width
+/// @param {number} $height
+/// @param {number} $skew - the angle of the parallelogram
+/// @param {string} $color
+/// @example scss
+///   .parallelogram {
+///     @include parallelogram(100px, 70px, 10deg, red);
+///   }
+///
+
+@mixin parallelogram($width, $height, $skew, $color) {
+    @include rectangle($width, $height, $color);
+    transform: skew($skew);
+}
+
+
+// -----------------------------------------------------------------------------
+// 3. Circle
+// -----------------------------------------------------------------------------
+
+/// CSS circle.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {number} $size
+/// @param {string} $color
+/// @example scss
+///   .circle {
+///      @include circle(100px, red);
+///   }
+///
+
+@mixin circle($size, $color) {
+    @include square($size);
+    background-color: $color;
+    border-radius: $size / 2;
+}
+
+
+// -----------------------------------------------------------------------------
+// 4. Oval
+// -----------------------------------------------------------------------------
+
+/// CSS oval.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {number} $width
+/// @param {number} $height
+/// @param {string} $color
+/// @example scss
+///   .oval {
+///     @include oval(100px, 50px, red);
+///   }
+///
+
+@mixin oval($width, $height, $color) {
+    width: $width;
+    height: $height;
+    border-radius: #{$width} / #{$height};
+    background-color: $color;
+}
+
+
+// -----------------------------------------------------------------------------
+// 5. Triangle
+// -----------------------------------------------------------------------------
+
+/// CSS triangle.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {string} $direction - up, down, left, right
+/// @param {number} $size
+/// @param {string} $color
+/// @example scss
+///   .triangle--up {
+///     @include triangle(up, 60px, red)
+///   }
+///
+
+@mixin triangle($direction, $size, $color) {
+    width: 0;
+    height: 0;
+
+    @if $direction == 'up' {
+        border-right: $size solid transparent;
+        border-bottom: $size * 1.732 solid $color;
+        border-left: $size solid transparent;
+    } @else if $direction == 'down' {
+        border-top: $size * 1.732 solid $color;
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+    } @else if $direction == 'left' {
+        border-top: $size solid transparent;
+        border-right: $size * 1.732 solid $color;
+        border-bottom: $size solid transparent;
+    } @else if $direction == 'right' {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size * 1.732 solid $color;
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// 6. Corner-triangle
+// -----------------------------------------------------------------------------
+
+/// CSS corner-triangle.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {string} $corner - top-left, top-right, bottom-left, bottom-right
+/// @param {number} $size
+/// @param {string} $color
+/// @example scss
+///   .corner-triangle--top-left {
+///     @include corner-triangle(top-left, 60px, red);
+///   }
+///
+
+@mixin corner-triangle($corner, $size, $color) {
+    width: 0;
+    height: 0;
+
+    @if $corner == 'top-left' {
+        border-top: $size solid $color;
+        border-right: $size solid transparent;
+    } @else if $corner == 'top-right' {
+        border-top: $size solid $color;
+        border-left: $size solid transparent;
+    } @else if $corner == 'bottom-left' {
+        border-right: $size solid transparent;
+        border-bottom: $size solid $color;
+    } @else if $corner == 'bottom-right' {
+        border-bottom: $size solid $color;
+        border-left: $size solid transparent;
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// 7. Trapezoid
+// -----------------------------------------------------------------------------
+
+/// CSS trapezoid.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {number} $width
+/// @param {string} $color
+/// @example scss
+///   .trapezoid {
+///     @include trapezoid(80px, red);
+///   }
+///
+
+@mixin trapezoid($width, $color) {
+    width: $width;
+    height: 0;
+    border-right: $width / 2 solid transparent;
+    border-bottom: $width solid $color;
+    border-left: $width / 2 solid transparent;
+}
+
+
+// -----------------------------------------------------------------------------
+// 8. Chevron
+// -----------------------------------------------------------------------------
+
+/// CSS chevron.
+/// @group CSS Shapes
+/// @access public
+///
+/// @param {string} $direction [up] - down, left, right
+/// @param {number} $width
+/// @param {number} $height
+/// @param {number} $skew - the angle of the chevron
+/// @param {string} $color
+/// @example scss
+///   .chevron--up {
+///     @include chevron(up, 120px, 40px, 20deg, red);
+///   }
+///
+
+@mixin chevron($direction, $width, $height, $skew, $color) {
+    position: relative;
+    width: $width;
+    height: $height;
+
+    @if $direction == 'down' {
+        transform: rotate(180deg);
+    } @else if $direction == 'left' {
+        transform: rotate(-90deg);
+    } @else if $direction == 'right' {
+        transform: rotate(90deg);
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background-color: $color;
+    }
+    &:before {
+        left: 0;
+        transform: skew(0deg, $skew);
+    }
+    &:after {
+        right: 0;
+        transform: skew(0deg, -$skew);
+    }
+}

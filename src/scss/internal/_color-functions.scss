@@ -1,0 +1,93 @@
+// -----------------------------------------------------------------------------
+// Color functions
+// Better (more flexible results) than default Sass functions
+//
+// -----------------------------------------------------------------------------
+// 1. Lighten by tinting
+// 2. Darken by shade
+// 3. Contrast foreground / background colors
+
+
+// -----------------------------------------------------------------------------
+// 1. Lighten by tinting
+// -----------------------------------------------------------------------------
+
+/// Slightly lighten a color.
+/// @group Color
+/// @access public
+///
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+/// @example scss
+///   .example {
+///     color: tint(#f00, 10%);
+///   }
+///
+/// @example css
+///   .example {
+///     color: #ff1919;
+///   }
+///
+
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+
+
+// -----------------------------------------------------------------------------
+// 2. Darken by shade
+// -----------------------------------------------------------------------------
+
+/// Slightly darken a color.
+/// @group Color
+/// @access public
+///
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+/// @example scss
+///   .example {
+///     color: shade(#f00, 10%);
+///   }
+///
+/// @example css
+///   .example {
+///     color: #e60000;
+///   }
+///
+
+@function shade($color, $percentage) {
+    @return mix(black, $color, $percentage);
+}
+
+
+// -----------------------------------------------------------------------------
+// 3. Contrast foreground / background colors
+// -----------------------------------------------------------------------------
+
+/// Examine a color and supply a contrasting one.
+/// @group Color
+/// @access public
+///
+/// @param {Color} $color - color to compare
+/// @example scss
+///   .example {
+///     color: contrast(#f00);
+///     background-color: #f00;
+///   }
+///
+/// @example css
+///   .example {
+///     color: #000;
+///     background-color: #f00;
+///   }
+///
+
+@function contrast($bgcolor) {
+    @if (lightness($bgcolor) > 50.1) {
+        @return #000; // light bg, use dark color
+    } @else {
+        @return #fff; // dark bg, use light color
+    }
+}

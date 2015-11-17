@@ -1,0 +1,50 @@
+// =============================================================================
+// Accessible, pretty radio buttons
+// See: http://codepen.io/heydon/pen/AtlsJ
+//
+// HTML Emmet pattern
+// label.label-radio>(input[type=radio]+span{radio button})
+//
+// =============================================================================
+
+
+.label-radio {
+    display: block;
+    font-size: 1.5em;
+    line-height: 2.5;
+    cursor: pointer;
+
+    [type="radio"] {
+        @include vis-hide;
+
+        + span {
+            display: block;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                margin-right: 0.75em;
+                @include square(1em);
+                border: 0.125em solid #fff;
+                border-radius: 1em;
+                box-shadow: 0 0 0 0.15em #000;
+                vertical-align: -0.25em;
+                transition: 0.5s ease all;
+            }
+        }
+    }
+
+    // the checked style using the :checked pseudo class
+    [type="radio"]:checked + span::before {
+        background: green;
+        box-shadow: 0 0 0 0.25em #000;
+    }
+
+    // never forget focus styling
+    [type="radio"]:focus + span::after {
+        content: '\0020\2190';
+        font-size: 1.5em;
+        line-height: 1;
+        vertical-align: -0.125em;
+    }
+}

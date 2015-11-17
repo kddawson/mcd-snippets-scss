@@ -1,0 +1,63 @@
+// =============================================================================
+// Accessible Tabs
+//
+// HTML Emmet pattern
+// div.tab-interface>(ul>(li>a)*3)+section#sectionID>h3{sectiontitle}
+// Use with js/jquery.accessible-tabs.js
+//
+// Demo: http://codepen.io/multicelldesign/pen/YyYMyj
+//
+// =============================================================================
+
+$tab-bg: #111;
+$tab-active-bg: #ccc;
+
+
+[role="tablist"] {
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: inline-block;
+        list-style: none;
+        // at a relevant breakpoint, stack
+        @include mq(s-port, max) {
+            width: 100%;
+        }
+    }
+}
+
+a[role="tab"] {
+    display: block;
+    margin-right: 0.25em;
+    padding: 0.75em 0.33em;
+    color: contrast($tab-bg);
+    background-color: $tab-bg;
+
+    &[aria-selected] {
+        color: contrast($tab-active-bg);
+        background-color: $tab-active-bg;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: contrast($tab-active-bg);
+        background-color: $tab-active-bg;
+    }
+}
+
+[role="tabpanel"] {
+    margin-top: 0;
+    padding: 1.5em;
+    border: 2px solid $tab-bg;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    &:focus {
+        // highlight the active panel
+        outline: thin dotted;
+    }
+}

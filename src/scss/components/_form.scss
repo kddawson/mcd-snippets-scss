@@ -1,0 +1,380 @@
+// =============================================================================
+// Form controls
+//
+// Note: may add aria-describedby on input (see: form-input-help.scss)
+//
+// =============================================================================
+
+
+// Settings
+// =============================================================================
+
+$legend-text-color:         #333;
+$legend-border-color:       #ddd;
+
+$label-width:               10em;
+$label-text-color:          #333;
+$label-bg:                  #e6e6e6;
+$label-align:               left;
+
+$input-bg:                  #fff;
+$input-border-color:        #ddd;
+$input-disabled-color:      #cad2d3;
+$input-disabled-bg:         #eaeded;
+$input-invalid-color:       #b94a48;
+$input-invalid-border:      #ee5f5b;
+// better control over height of input fields, add if required
+$input-lineheight:          16px;
+
+$border-radius:             0;
+
+$checkbox-size:             2em;
+$checkbox-color:            #ccc;
+
+$focus-outline-color:       #129fea;
+
+$placeholder-text-color:    #999;
+
+
+// General styles
+// =============================================================================
+
+fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+
+legend {
+    display: block;
+    padding: 0.3em 0;
+    width: 100%;
+    color: $legend-text-color;
+    border-bottom: 1px solid $legend-border-color;
+    @include font-size-rems(14);
+    white-space: normal; // FF3
+}
+
+// If mixing returned / calculated values within a form use div.static-label
+label,
+.static-label {
+    margin: 0.5em 0 0.2em;
+    color: $label-text-color;
+    background-color: $label-bg;
+    @include font-size-rems(14);
+    text-align: $label-align;
+    @extend %user-select;
+}
+
+input {
+    min-height: $input-lineheight;
+}
+
+input,
+select,
+textarea,
+.static-form-control {
+    display: inline-block;
+    margin: 0;
+    padding: 0.5em 0.6em;
+    border-radius: $border-radius;
+    border: 1px solid $input-border-color;
+    transition: border, 0.3s, linear;
+    @include font-size-rems(14);
+    -webkit-font-smoothing: antialiased;
+    vertical-align: middle;
+}
+
+// removes the IE "helper" icons, specifically on password field
+// See: http://stackoverflow.com/questions/17000562/removing-clear-and-reavel-password-icons-from-ie10-ms-clear-ms-reveal-not
+
+input::-ms-clear,
+input::-ms-reveal {
+    display:none;
+}
+
+
+// Checkboxes and Radios
+// HTML Emmet pattern (add label text after input)
+// label[for="option"].checkbox>input[type="checkbox"][id="option"]
+// label[for="option"].radio>input[type="radio"][id="option"][name="shared"]
+// =============================================================================
+
+input[type="checkbox"],
+input[type="radio"] {
+    padding: 0;
+}
+
+// applied to label
+.checkbox,
+.radio {
+    display: block;
+    margin: 0.5em 0;
+    text-align: left;
+
+    .aligned-inputs & {
+        width: auto;
+    }
+}
+
+
+// Select box
+// For accessible custom select box consider form-accessible-select.less
+// =============================================================================
+
+select {
+    background-color: $input-bg;
+
+    &[multiple] {
+        height: auto;
+    }
+}
+
+
+// Checkboxes
+// HTML Emmet pattern (needs the label after the input)
+// fieldset>legend+div.checkbox-group>input[type="checkbox"][id="option"]+label[for="option"]
+//
+// See also: form-checkbox-label-group.less
+// =============================================================================
+
+.checkbox-group {
+    position: relative;
+    width: $label-width + ($checkbox-size / 2);
+    background-color: $checkbox-color;
+    line-height: 1;
+
+    /*@include mq(s-port) {
+        margin-left: 0;
+    }*/
+
+    input {
+        position: relative;
+        top: 0;
+        z-index: 5;
+        left: $label-width;
+        width: $checkbox-size;
+        height: $checkbox-size + 0.6em; // adds some padding
+        vertical-align: middle;
+
+        &:checked + label {
+            color: $label-text-color;
+        }
+    }
+
+    label {
+        margin-left: -$checkbox-size;
+        width: $label-width;
+        color: $label-text-color;
+        background-color: $checkbox-color;
+        @include font-size-rems(14);
+        text-align: left;
+        cursor: pointer;
+        vertical-align: middle;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+// Input states
+// =============================================================================
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: $focus-outline-color;
+    outline: 0;
+    outline: thin dotted \9; // IE6-9
+}
+
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: thin dotted $focus-outline-color;
+    outline: 1px auto $focus-outline-color;
+}
+
+
+// disabled
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+    color: $input-disabled-color;
+    background-color: $input-disabled-bg;
+    border-color: transparent;
+    cursor: not-allowed;
+}
+
+// invalid
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
+    color: $input-invalid-color;
+    border: 1px solid $input-invalid-border;
+}
+
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus {
+    border-color: $input-invalid-border;
+}
+
+input[type="file"]:focus:invalid:focus,
+input[type="radio"]:focus:invalid:focus,
+input[type="checkbox"]:focus:invalid:focus {
+    outline-color: $input-invalid-border;
+}
+
+
+// Placeholder text
+// Can't group these styles up (browsers fail to read)
+// =============================================================================
+
+@mixin placeholder($color: $placeholder-text-color) {
+    &:-moz-placeholder            { color: $color; } // Firefox 4-18
+    &::-moz-placeholder           { color: $color; } // Firefox 19+
+    &:-ms-input-placeholder       { color: $color; } // Internet Explorer 10+
+    &::-webkit-input-placeholder  { color: $color; } // Safari and Chrome
+
+    // "Hide" the placeholder text on focus to save confusion
+    &:focus:-moz-placeholder            { color: transparent; }
+    &:focus::-moz-placeholder           { color: transparent; }
+    &:focus:-ms-input-placeholder       { color: transparent; }
+    &:focus::-webkit-input-placeholder  { color: transparent; }
+}
+
+input,
+textarea {
+    @include placeholder;
+}
+
+
+// Form alignment
+// Default is inline
+// =============================================================================
+
+.control-group {
+    margin-bottom: 0.5em;
+}
+
+.labels-right {
+
+    label {
+        text-align: right;
+    }
+}
+
+.labels-left {
+
+    label {
+        text-align: left;
+    }
+}
+
+.offset {
+    margin-left: $label-width;
+}
+
+// Aligned inputs
+// fieldset.aligned-inputs>legend+div.control-group>label[for="inputID"]+input[type="text"][id="inputID"]
+.aligned-inputs {
+
+    // Set label/control pairs in a block (.control-group)
+    input,
+    textarea,
+    select,
+    .form-message-inline {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    label {
+        display: inline-block;
+        margin: 0 1em 0 0;
+        width: $label-width;
+        vertical-align: middle;
+
+        // div.control-group>label[for="ctrl"].label-text-area+input[type="textarea"]
+        &.label-text-area {
+            vertical-align: top;
+        }
+    }
+
+    // container for buttons
+    .controls {
+        margin: 1.5em 0 0 $label-width;
+
+        a {
+            vertical-align: top;
+        }
+    }
+}
+
+// Stacked inputs
+// Set labels and input controls to block
+.stacked-inputs {
+    input[type="text"],
+    select,
+    label {
+        display: block;
+    }
+}
+
+// Grouped (compact) inputs, vis-hide the labels
+// fieldset.grouped-inputs>legend{legend}+label[for="inputID"].vis-hide+input[type="text"][id="inputID"]
+// Relies on placeholder support, for visual cue
+.grouped-inputs {
+    margin-bottom: 10px;
+
+    input {
+        position: relative;
+        top: -1px;
+        display: block;
+        margin: 0;
+        padding: 10px;
+
+        &:focus {
+            z-index: 2;
+        }
+
+        &:first-child {
+            top: 1px;
+        }
+
+        &:last-child {
+            top: -2px;
+        }
+    }
+
+    button {
+        margin: 0.35em 0;
+    }
+}
+
+
+// Textarea
+// =============================================================================
+
+@mixin resizable($direction: both) {
+    // options: none, horizontal, vertical, both
+    resize: $direction;
+    // Safari fix
+    overflow: auto;
+}
+
+textarea {
+    @include resizable;
+}
+
+.textarea {
+
+    label {
+        vertical-align: top;
+    }
+}

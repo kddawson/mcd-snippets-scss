@@ -1,0 +1,97 @@
+// =============================================================================
+// Page layout - fixed header/footer
+//
+// HTML Emmet pattern
+// div.page>header[role="banner"]+div.page__content>(div.page__sidebar+main[role="main"])^+footer[role="contentinfo"]
+//
+// =============================================================================
+
+
+$header-height:         44px;       // pos:fixed .navbar height
+$sidebar-width:         214px;
+$sidebar-bgcolor:       #000;
+$content-bgcolor:       #e6e6e6;
+$page-header-height:    80px;       // pos:fixed .page-header height
+$footer-height:         20px;       // required
+$footer-bgcolor:        #ddd;
+$scroll-pane-height:    100%;
+$collapsed-sidebar:     80px;
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.page {
+    height: 100%;
+}
+
+[role="banner"] {
+    height: $header-height;
+}
+
+.page__content {
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    bottom: $footer-height;
+    left: 0;
+}
+
+.page__sidebar {
+    position: absolute;
+    @include size($sidebar-width, 100%);
+    background: $sidebar-bgcolor;
+    transition: all 0.3s linear;
+
+    @include mq(m-land, max) {
+        // need to style the nav at this size obviously...
+        width: $collapsed-sidebar;
+    }
+}
+
+[role="main"] {
+    margin-left: $sidebar-width;
+    overflow-y: auto;
+    padding: 0 1em;
+    height: 100%;
+    background-color: $content-bgcolor;
+    transition: all 0.3s linear;
+
+    &.no-sidebar {
+        margin-left: 0;
+    }
+
+    @include mq(m-land, max) {
+        margin-left: $collapsed-sidebar;
+    }
+}
+
+[role="contentinfo"] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    @include size(100%, $footer-height);
+    background-color: $footer-bgcolor;
+    text-align: center;
+}
+
+.page-header {
+    display: table;
+    padding: 0 1em;
+    @include size(100%, $page-header-height);
+    background-color: #666;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    h1 {
+        display: table-cell;
+        margin: 0;
+        vertical-align: middle;
+    }
+
+    .no-sidebar & {
+        left: 0;
+    }
+}

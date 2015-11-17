@@ -1,0 +1,94 @@
+// =============================================================================
+// Icons
+//
+// Decorative Icons
+// i.icon.icon-[aria-hidden="true"]+{some text}
+//
+// Critical Icons (convey information) with text fallback
+// i.icon.icon-[aria-hidden="true"]+span.icon__fallback-text{fallback text}
+//
+// =============================================================================
+
+
+$iconfont-path: "../../fonts/";
+$iconfont-name: "fontname";
+$iconfont-id: "project";
+
+@font-face {
+    font-family: '#{icon-font-name}';
+    src:url('#{$iconfont-path}/#{$iconfont-name}.eot?#{$iconfont-id}');
+    src:url('#{$iconfont-path}/#{$iconfont-name}.eot?#iefix#{$iconfont-id}') format('embedded-opentype'),
+        url('#{$iconfont-path}/#{$iconfont-name}.ttf?#{$iconfont-id}') format('truetype'),
+        url('#{$iconfont-path}/#{$iconfont-name}.woff?#{$iconfont-id}') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+%icon-font {
+    position: relative;
+    font-family: '#{$iconfont-name}';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    speak: none;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon {
+    position: relative;
+
+    &::before {
+        @extend %icon-font;
+    }
+}
+
+// Option 1: include via data-icon attribute
+[data-icon]:not([data-pos])::before {
+    @extend %icon-font;
+    content: attr(data-icon);
+}
+
+// Option 2: via icon classes
+.fontface {
+
+    // accessibly hide the text
+    .icon__fallback-text {
+        @include vis-hide;
+    }
+}
+
+.no-fontface {
+
+    // fully hide the icon to avoid the empty box
+    .icon {
+        @include full-hide;
+    }
+}
+
+// Sizes
+// =============================================================================
+
+@each $size, $iconsize in $icon-sizes {
+    .icon--#{$size} {
+        $dimensions: $iconsize * 1px;
+        @include font-size-rems($iconsize);
+
+        &::before {
+            @include square($dimensions);
+        }
+    }
+}
+
+
+// Icon types
+// =============================================================================
+
+@each $type, $icon in $icon-types {
+    .icon--#{$type} {
+        content: $icon;
+    }
+}

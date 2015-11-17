@@ -1,0 +1,22 @@
+// =============================================================================
+// Accessible Content Toggle (show / hide)
+//
+// HTML Emmet pattern
+// button[type=button].jsCollapsible>span.jsRevealStatus.vis-hide[aria-hidden=true][aria-live=polite][role=status]{Show}+{ Display}^div.sibling
+//
+// Use with jquery.collapsible-content.js
+//
+// =============================================================================
+
+
+.collapsible-content {
+    overflow: hidden;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    &[aria-hidden="false"] {
+        display: block;
+    }
+}

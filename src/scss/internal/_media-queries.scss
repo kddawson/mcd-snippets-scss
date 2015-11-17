@@ -1,0 +1,52 @@
+// -----------------------------------------------------------------------------
+// Media queries
+//
+// -----------------------------------------------------------------------------
+
+
+/// Mixin for min/max, width/height media queries using pre-defined breakpoint sizes.
+/// @access public
+///
+/// @requires {variable} $base-font-size
+/// @param {string} $breakpoint - see Sass map `$breakpoints` defined in `._variables.scss`
+/// @param {string} $query1 [min] - min or max
+/// @param {string} $query2 [width] - width or height
+/// @example scss
+///   .example {
+///     @include mq(s-port) {
+///         background-color: #000;
+///     }
+///   }
+///
+///   .example2 {
+///     @include mq(s-port, max) {
+///         background-color: #000;
+///     }
+///   }
+///
+/// @example css
+///     @media screen and (min-width: 20em) {
+///         .example {
+///             background-color: #000;
+///         }
+///     }
+///
+///     @media screen and (max-width: 20em) {
+///         .example2 {
+///             background-color: #000;
+///         }
+///     }
+///
+
+
+@mixin mq($breakpoint, $query1: min, $query2: width) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $value: map-get($breakpoints, $breakpoint);
+
+        @media screen and (#{$query1}-#{$query2}: $value / $base-font-size +em) {
+            @content;
+        }
+    } @else {
+        @warn "The key `#{$breakpoint}` is not available in the `$breakpoints` map";
+    }
+}

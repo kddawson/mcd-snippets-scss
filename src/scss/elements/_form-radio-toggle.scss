@@ -1,0 +1,65 @@
+// =============================================================================
+// Radio toggle switch
+// See: https://www.paypal-engineering.com/2014/01/15/a-sweet-toggle-switch/
+//
+// HTML Emmet pattern
+// div.toggle-group>(input[type="radio"][id="option"][name="name"]+label[for="option"])*2
+//
+// =============================================================================
+
+
+// Settings
+// =============================================================================
+
+$label-text-color:      #333;
+$label-bg:              #fff;
+$input-bg:              #fff;
+$input-border-color:    #ddd;
+$toggle-checked-bg:     #ccc;
+$toggle-checked-border: shade($toggle-checked-bg, 20%);
+$border-radius:         0.5em;
+
+
+.toggle-group {
+    @include cf;
+
+    input[type="radio"] {
+        @include vis-hide;
+
+        &:checked + label {
+            color: #000;
+            background-color: $toggle-checked-bg;
+            border: 1px solid $toggle-checked-border;
+        }
+    }
+
+    label {
+        display: inline-block;
+        float: left;
+        padding: 0.5em;
+        width: 8em;
+        color: $label-text-color;
+        background-color: $label-bg;
+        border: 1px solid $input-border-color;
+        text-align: center;
+        cursor: pointer;
+
+        &:first-of-type {
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+        }
+
+        &:last-of-type {
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: #000;
+            background-color: $toggle-checked-bg;
+            border: 1px solid $toggle-checked-border;
+        }
+    }
+}

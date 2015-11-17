@@ -1,0 +1,24 @@
+// =============================================================================
+// Animate In
+//
+// Use a CSS transition, where supported, to fade in content on scroll
+// Use with jquery.animate-in.js
+//
+// =============================================================================
+
+
+.csstransitions {
+
+    .animate-in {
+        opacity: 0;
+        transition: opacity 1s ease-in;
+    }
+
+    .come-in {
+        opacity: 1;
+    }
+
+    .already-visible {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,41 @@
+// =============================================================================
+// Swap content blocks left and right on alternating rows
+//
+// HTML Emmet pattern
+// div.alt-blocks.alt-blocks--odd>(div.alt-blocks__row>div*2)*3
+//
+// =============================================================================
+
+
+$nthchild-oddeven: (
+  'odd',
+  'even',
+);
+
+.alt-blocks {
+    @include cf;
+
+    &__row {
+        @include cf;
+
+        // If not using grid classes
+        > div {
+            display: inline-block;
+            float: left;
+            width: 50%;
+        }
+    }
+
+    @each $key, $value in $nthchild-oddeven {
+
+        &--#{$key} {
+            .alt-blocks__row {
+                &:nth-child(#{$key}) {
+                    > div:first-child {
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+}

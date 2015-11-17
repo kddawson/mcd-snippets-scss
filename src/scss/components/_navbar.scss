@@ -1,0 +1,154 @@
+// =============================================================================
+// Aria-enabled Navigation (vertical or horizontal)
+//
+// Use with js/jquery.navbar.js
+//
+// =============================================================================
+
+
+// Settings
+$blue        : #009ad9;
+$red         : #ef4136;
+$gray-lighter: #ccc;
+$gray-dark   : #111;
+
+$menu-item-height: 44px;
+$nav-item-color: #fff;
+$nav-item-bg: transparent;
+$nav-item-active-color: #fff;
+$nav-item-active-bg: $blue;
+
+$subnav-indent: 32px;
+$subnav-bg: $gray-dark;
+
+
+// Top-Level Navigation
+// nav.nav[role="navigation"]>ul.nav__menu>li.nav__menu-item>a{}
+// =============================================================================
+
+.nav--skip-section {
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: underline;
+    }
+}
+
+.nav__menu {
+    margin: 0;
+    padding: 0;
+}
+
+.nav__menu-item {
+    position: relative;
+    display: table; // allows use of display:table-cell for button
+    width: 100%;
+
+    > a {
+        position: relative;
+        display: table-cell; // allows use of vertical-align
+        padding: 0 0.5em;
+        height: $menu-item-height;
+        vertical-align: middle;
+        color: $nav-item-color;
+        background-color: $nav-item-bg;
+        text-decoration: none;
+
+        &[aria-selected="true"],
+        &:hover,
+        &:focus,
+        &:active {
+            color: $nav-item-active-color;
+            background-color: $nav-item-active-bg;
+        }
+
+        .nav__subnav & {
+            padding-left: $subnav-indent;
+        }
+
+        > .icon {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        > span {
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 0.5em;
+        }
+    }
+}
+
+[aria-haspopup="true"] {
+    // closed icon (eg arrow-right)
+
+    + [aria-selected="true"] {
+        // open icon (rotate arrow-right to point down - transform: rotate(90deg);)
+    }
+}
+
+
+// Sub-Level Navigation
+// JavaScript adds [aria-haspopup="true"][aria-selected="false"]
+// .nav__menu-item a[aria-selected="false"] and .nav__subnav[aria-expanded="false"] toggled on click()
+// =============================================================================
+
+.nav__subnav {
+    margin: 0;
+    padding: 0;
+    background-color: $subnav-bg;
+
+    &[aria-expanded="false"] {
+        display: none;
+    }
+
+    &[aria-expanded="true"] {
+        display: table-row;
+    }
+}
+
+
+// Horizontal nav
+// nav.nav--horiz
+// =============================================================================
+
+.nav--horiz {
+
+    .nav__menu {
+        height: $menu-item-height;
+        background-color: $gray-dark;
+    }
+
+    .nav__menu-item {
+        display: inline-block;
+        height: $menu-item-height;
+        width: auto;
+    }
+
+    [aria-expanded="true"] {
+        display: block;
+        position: absolute;
+        top: $menu-item-height;
+        z-index: 2;
+    }
+
+    .nav__subnav {
+        padding-left: 0;
+        width: 100%;
+        background-color: $gray-dark;
+
+        &[aria-expanded="true"] {
+            display: block;
+        }
+
+        .nav__menu-item {
+            display: table;
+            width: 100%;
+            height: $menu-item-height;
+
+            > a {
+                padding-left: 1em;
+            }
+        }
+    }
+}

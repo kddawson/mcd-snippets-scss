@@ -1,0 +1,42 @@
+// =============================================================================
+// Center-alignment
+//
+// Position a child centrally within a parent container
+// See also: internal/_helpers.scss @mixin ghostVAlign
+//
+// =============================================================================
+
+
+.center-transform-parent {
+    position: relative;
+    // some width;
+    // some height;
+}
+
+.center-transform__child {
+    position: absolute;
+
+    // Dead center
+    &--cc {
+        top: 50%;
+        left: 50%;
+        margin: auto;
+        transform: translate(-50%, -50%);
+    }
+
+    // Top center
+    &--tc {
+        left: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        transform: translateX(-50%);
+    }
+
+    // left center
+    &--lc {
+        top: 50%;
+        margin-top: auto;
+        margin-bottom: auto;
+        transform: translateY(-50%);
+    }
+}

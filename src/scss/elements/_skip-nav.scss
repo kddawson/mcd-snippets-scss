@@ -1,0 +1,32 @@
+// =============================================================================
+// Skip navigation
+// http://webaim.org/techniques/skipnav/
+//
+// HTML Emmet pattern
+// a[href="#main"].nav--skip-section{Skip to main content}
+//
+// =============================================================================
+
+
+.nav--skip-section {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    z-index: 10;
+    padding: 4px;
+    color: #fff;
+    background-color: #000;
+    box-shadow: 0, 0, 5px, 2px, rgba(0, 0, 0, 0.6);
+    @include font-size-rems(12);
+    text-decoration: none;
+    transition: position, 0.05s, ease-in;
+    transition: background-color, 1s linear;
+
+    &:focus,
+    &:active {
+        top: 10px;
+        z-index: 10000;
+        color: #fff;
+        background-color: #f00;
+    }
+}

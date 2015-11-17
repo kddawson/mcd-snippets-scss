@@ -1,0 +1,45 @@
+/// Slightly lighten a color
+///
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+///
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+/// Examine a color and supply a contrasting one
+///
+/// @access public
+/// @param {Color} $color - color to compare
+/// @example scss
+///   .example {
+///     color: contrast(#000);
+///     background-color: #000;
+///   }
+///
+/// @example css
+///   .example {
+///     color: #fff;
+///     background-color: #000;
+///   }
+
+@function contrast($bgcolor) {
+    @if (lightness($bgcolor) > 50) {
+        @return #000; // light bg, use dark color
+    } @else {
+        @return #fff; // dark bg, use light color
+    }
+}

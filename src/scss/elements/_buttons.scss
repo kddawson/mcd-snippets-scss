@@ -1,0 +1,76 @@
+// =============================================================================
+// Buttons
+//
+// HTML Emmet pattern
+// button[type="button"].btn>span.btn__label{label}
+//
+// =============================================================================
+
+
+button,
+.btn {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 1em;
+    background: none;
+    border: none;
+    text-align: center;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+    vertical-align: baseline;
+    cursor: pointer;
+
+    &[disabled] {
+        opacity: 0.5;
+    }
+}
+
+// *cringe* also makes anchor elements look like buttons...
+// Useful when using JS enhancement to change behaviour
+[role="button"] {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+
+    &[disabled] {
+        opacity: 0.5;
+    }
+}
+
+.btn__label {
+    display: inline-block;
+    line-height: 1;
+}
+
+// Sizes
+// =============================================================================
+
+@each $size, $fontsize in $btn-sizes {
+    .btn--#{$size} {
+        @include font-size-rems($fontsize);
+    }
+}
+
+
+// Button types
+// =============================================================================
+
+@each $type, $color in $btn-types {
+    .btn--#{$type} {
+        $bg: shade($color, 10%);
+
+        color: contrast($color);
+        background-color: $color;
+        border: 1px solid shade($color, 10%);
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: contrast($bg);
+            background-color: $bg;
+            border: 1px solid shade($color, 20%);
+        }
+    }
+}

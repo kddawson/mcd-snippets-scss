@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Soup o' Snippets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="dist/css/theme/theme-foo.min.css">
+</head>
+<body>
+    <div class="page">
+        <header role="banner">
+            <nav class="nav nav--horiz" role="navigation">
+                <a href="#main" class="nav--skip-section">Skip to main content</a>
+                <ul class="nav__menu">
+                    <li class="nav__menu-item">
+                        <a href="">
+                            <i class="icon icon--rocket" aria-hidden="true"></i>
+                            <span>menu item</span>
+                        </a>
+                    </li>
+                    <li class="nav__menu-item">
+                        <a href="">
+                            <i class="icon icon--rocket" aria-hidden="true"></i>
+                            <span>item with subnav</span>
+                        </a>
+                        <ul class="nav__subnav" aria-label="submenu">
+                            <li class="nav__menu-item"><a href="">subnav item</a></li>
+                            <li class="nav__menu-item"><a href="">subnav item</a></li>
+                            <li class="nav__menu-item"><a href="">subnav item</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav__menu-item">
+                        <a href="">
+                            <i class="icon icon--rocket" aria-hidden="true"></i>
+                            <span>menu item</span>
+                        </a>
+                    </li>
+                    <li class="nav__menu-item">
+                        <a href="">
+                            <i class="icon icon--rocket" aria-hidden="true"></i>
+                            <span>menu item</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <button type="button" id="flyoutToggle" class="btn btn--flyout">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="vis-hide">Menu</span>
+            </button>
+        </header>
+        <div class="page__content">
+            <div id="panelFlyout" class="panel-flyout panel-flyout--right">
+                <div class="panel-flyout__inner">
+                    inner content of panel
+                </div>
+            </div>
+            <div class="page__sidebar">
+                <nav class="nav" role="navigation">
+                    <!--
+                        commented out so as to not clash with the horizontal nav
+                        <a href="#main" class="nav--skip-section">Skip to main content</a>
+                    -->
+                    <ul class="nav__menu">
+                        <li class="nav__menu-item">
+                            <a href="">
+                                <i class="icon icon--rocket" aria-hidden="true"></i>
+                                <span>menu item</span>
+                            </a>
+                        </li>
+                        <li class="nav__menu-item">
+                            <a href="">
+                                <i class="icon icon--rocket" aria-hidden="true"></i>
+                                <span>item with subnav</span>
+                            </a>
+                            <ul class="nav__subnav" aria-label="submenu">
+                                <li class="nav__menu-item"><a href="">subnav item</a></li>
+                                <li class="nav__menu-item"><a href="">subnav item</a></li>
+                                <li class="nav__menu-item"><a href="">subnav item</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav__menu-item">
+                            <a href="">
+                                <i class="icon icon--rocket" aria-hidden="true"></i>
+                                <span>menu item</span>
+                            </a>
+                        </li>
+                        <li class="nav__menu-item">
+                            <a href="">
+                                <i class="icon icon--rocket" aria-hidden="true"></i>
+                                <span>menu item</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <main role="main">
+                <h1>Soup o' Snippets</h1>
+                <section>
+                    <h2>Accessible reveal with jQuery</h2>
+                    <button type="button" class="btn btn--primary jsCollapsible">
+                        <span class="jsRevealStatus vis-hide" aria-live="polite" role="status">Show</span> Details
+                    </button>
+                    <div class="sibling">
+                        <p>Uses <code>src/less/components/accessible-content-toggle.less</code> and <code>src/js/jquery.collapsible-content.js</code>.</p>
+                    </div>
+                </section>
+                <hr>
+                <div class="tab-interface">
+                    <ul>
+                        <li><a href="#default">Default Form</a></li>
+                        <li><a href="#aligned">Aligned Inputs</a></li>
+                        <li><a href="#grouped">Grouped Inputs</a></li>
+                        <li><a href="#stacked">Stacked Inputs</a></li>
+                        <li><a href="#custom">Custom Form Controls</a></li>
+                        <li><a href="#components">Components</a></li>
+                    </ul>
+                    <section id="default">
+                        <h2>Default Form (inline labels)</h2>
+                        <form action="/">
+                            <fieldset>
+                                <legend>Default Form</legend>
+                                <label for="input">label</label>
+                                <input type="text" id="input" aria-describedby="aria" value="">
+                                <div id="aria" role="tooltip">Tooltip help</div>
+                                <label for="input2">another label</label>
+                                <input type="email" id="input2" placeholder="email address" value="">
+                                <label for="option1"><input type="checkbox" id="option1">A checkbox</label>
+                            </fieldset>
+                            <fieldset>
+                                <label for="select2">Default select</label>
+                                <select id="select2">
+                                    <option value="value">text</option>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <label for="datepicker2">HTML5 Datepicker</label>
+                                <input type="date" id="datepicker2">
+                            </fieldset>
+                            <fieldset>
+                                <legend>Checkbox question</legend>
+                                <label for="option2" class="checkbox"><input type="checkbox" id="option2">Yes</label>
+                                <label for="option3" class="checkbox"><input type="checkbox" id="option3">No</label>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Radio question</legend>
+                                <label class="radio"><input type="radio" id="option4" name="radio">Yes</label>
+                                <label class="radio"><input type="radio" id="option5" name="radio">No</label>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Checkbox style 1</legend>
+                                <div class="control-group checkbox-group">
+                                    <input type="checkbox" value="" id="option6">
+                                    <label for="option6">Checkbox Option</label>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Checkbox style 2</legend>
+                                <!-- form-checkbox-label-group.less -->
+                                <label class="checkbox-label-group">
+                                    <input type="checkbox" value="">
+                                    <span class="form-control checkbox">checkbox</span>
+                                </label>
+                            </fieldset>
+                            <div class="controls">
+                                <button type="button" class="btn btn--primary">
+                                    <span class="btn__label">Submit</span>
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+                    <section id="aligned">
+                        <h2>Aligned Inputs</h2>
+                        <form action="/">
+                            <fieldset class="aligned-inputs labels-right">
+                                <legend>Aligned inputs</legend>
+                                <div class="control-group">
+                                    <label for="input3">Invoke numeric keypad</label>
+                                    <input type="number" id="input3" value="">
+                                </div>
+                                <div class="control-group">
+                                    <label for="input4">Input with help text</label>
+                                    <input type="text" id="input4" aria-describedby="aria2" value="">
+                                    <div id="aria2" role="tooltip">Tooltip help</div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="datepicker">Non-HTML5 Datepicker</label>
+                                    <input type="text" id="datepicker" class="datepicker">
+                                </div>
+                                <div class="control-group textarea">
+                                    <label for="txtarea">Text area</label>
+                                    <textarea id="txtarea" cols="25" rows="5"></textarea>
+                                </div>
+                                <div class="controls">
+                                    <button type="submit">Submit</button>
+                                </div>
+                            </fieldset>
+                            <fieldset class="grouped-inputs offset">
+                                <legend>Offset (and grouped) inputs</legend>
+                                <label for="inputID" class="vis-hide">CC number</label>
+                                <!-- numeric keyboard -->
+                                <input type="text" id="inputID" pattern="\d*" placeholder="credit card number">
+                                <label for="inputID2" class="vis-hide">Label</label>
+                                <input type="text" id="inputID2" placeholder="placeholder">
+                            </fieldset>
+                            <fieldset class="offset">
+                                <legend>Checkbox style 1</legend>
+                                <div class="control-group checkbox-group">
+                                    <input type="checkbox" value="" id="option7" />
+                                    <label for="option7">Checkbox Option</label>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </section>
+                    <section id="grouped">
+                        <h2>Grouped Inputs</h2>
+                        <form action="/">
+                            <fieldset class="grouped-inputs">
+                                <legend>Grouped inputs</legend>
+                                <label for="inputID5" class="vis-hide">Label</label>
+                                <input type="text" id="inputID5" placeholder="placeholder">
+                                <label for="inputID6" class="vis-hide">Label</label>
+                                <input type="text" id="inputID6" placeholder="placeholder">
+                            </fieldset>
+                            <button type="submit" class="btn btn--primary">Submit</button>
+                        </form>
+                    </section>
+                    <section id="stacked">
+                        <h2>Stacked Inputs</h2>
+                        <form action="/">
+                            <fieldset class="stacked-inputs">
+                                <legend>Stacked inputs</legend>
+                                <label for="inputID7">Label</label>
+                                <input type="text" id="inputID7" placeholder="placeholder">
+                                <label for="inputID8">Label</label>
+                                <input type="text" id="inputID8" placeholder="placeholder">
+                            </fieldset>
+                            <button type="submit" class="btn btn--primary">Submit</button>
+                        </form>
+                    </section>
+                    <section id="custom">
+                        <h2>Custom Form Controls</h2>
+                        <form action="/">
+                            <label class="checkbox-label-group">
+                                <input type="checkbox" value="">
+                                <span class="form-control checkbox">form-checkbox-radio</span>
+                            </label>
+                            <fieldset>
+                                <div class="field">
+                                    <input type="text" id="formFloatedLabel" value="" pattern=".+" placeholder="form-floated-label">
+                                    <label for="formFloatedLabel">form-floated-label</label>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>form-radio-toggle</legend>
+                                <div class="toggle-group">
+                                    <input type="radio" id="radio1" name="name" checked="checked">
+                                    <label for="radio1">Yes</label>
+                                    <input type="radio" id="radio2" name="name">
+                                    <label for="radio2">No</label>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>form-radio-button</legend>
+                                <label for="accessible" class="label-radio">
+                                    <input type="radio" value="yes" name="quality" id="accessible"> <span>Yes</span>
+                                </label>
+                                <label for="pretty" class="label-radio">
+                                    <input type="radio" value="no" name="quality" id="pretty"> <span>No</span>
+                                </label>
+                            </fieldset>
+                            <fieldset>
+                                <legend>radio button dipswitches</legend>
+                                <div class="dipswitch-block">
+                                    <span id="dip-1" class="vis-hide">switch-1</span>
+                                    <div class="radio" aria-labelledby="dip-1">
+                                        <label>
+                                            <input type="radio" id="seq-1" name="seq-1" value="1" class="dip-switch" checked data-bind="checked:value,attr:{name:sequence}">
+                                            <span class="vis-hide">On</span>
+                                        </label>
+                                    </div>
+                                    <div class="radio" aria-labelledby="dip-1">
+                                        <label>
+                                            <input type="radio" id="seq-1" name="seq-1" value="0" class="dip-switch" data-bind="checked:value,attr:{name:sequence}">
+                                            <span class="vis-hide">Off</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Read-only dipswitches</legend>
+                                <div class="dipswitch-block--readonly show-labels">
+                                    <span class="dip-switch--readonly" title="On">
+                                        <span class="">On</span>
+                                    </span>
+                                    <span class="dip-switch--readonly" title="Off">
+                                        <span class="">Off</span>
+                                    </span>
+                                    <span class="dip-switch--readonly" title="Off">
+                                        <span class="">Off</span>
+                                    </span>
+                                    <span class="dip-switch--readonly" title="On">
+                                        <span class="">On</span>
+                                    </span>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>File Upload</legend>
+                                <input type="file" id="fileUpload" class="jsFileUpload" data-multiple-caption="{count} files selected" multiple>
+                                <label for="fileUpload"><span class="jsFileName">Uplaod teh codez</span></label>
+                            </fieldset>
+                            <button type="button" id="startModal" class="btn btn--primary">View modal</button>
+                        </form>
+                    </section>
+                    <section id="components">
+                        <h2>Swap the left/right position of content blocks in alternate rows</h2>
+                        <div class="alt-blocks alt-blocks--odd">
+                            <div class="alt-blocks__row">
+                                <div>source order 1</div>
+                                <div>source order 2</div>
+                            </div>
+                            <div class="alt-blocks__row">
+                                <div>source order 3</div>
+                                <div>source order 4</div>
+                            </div>
+                            <div class="alt-blocks__row">
+                                <div>source order 5</div>
+                                <div>source order 6</div>
+                            </div>
+                        </div>
+                        <h2>Card (with large shadow)</h2>
+                        <div class="card shadow--24dp">
+                            <div class="card__title card--border">
+                                <h2 class="card__title-text">Title Text</h2>
+                            </div>
+                            <div class="card__media">
+                                <img src="http://lorempixel.com/600/300/" alt="">
+                            </div>
+                            <div class="card__text">
+                            This text might describe the photo and provide further information, such as where and
+                            when it was taken.
+                            </div>
+                            <div class="card__actions card--border">
+                                <a href="#">Related Action</a>
+                            </div>
+                        </div>
+                        <h2>Box reveal</h2>
+                        <div class="box-reveal">
+                            <a href="">
+                                <h2 class="box-reveal__title"></h2>
+                                <div class="box-reveal__img">
+                                    <div class="box-reveal__img-bg"></div>
+                                    <div class="box-reveal__tint"></div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="box-reveal__content"></div>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+        <footer role="contentinfo">
+            footer, yo
+        </footer>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay" tabindex="-1"></div>
+    <div id="modal" class="modal" aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" role="dialog">
+        <button type="button" id="modalClose" class="btn btn--close">Close</button>
+        <p id="modalDescription" class="modal__description vis-hide">Description of modal for screen reader users</p>
+        <h1 id="modalTitle" class="modal__title">Modal Title</h1>
+        <div class="modal__inner">
+            Modal body
+        </div>
+    </div>
+
+    <script src="dist/js/app.min.js"></script>
+    <script>
+        if (jQuery) {
+            (function ($) {
+                "use strict";
+                $(document).ready(function () {
+                    // accessible reveal
+                    $('.jsCollapsible').collapsible();
+
+                    // jQueryUI datepicker
+                    //$(".datepicker").datepicker();
+                });
+            }(jQuery));
+        };
+    </script>
+</body>
+</html>

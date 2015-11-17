@@ -1,0 +1,18 @@
+// =============================================================================
+// Responsive images and embeds
+//
+// =============================================================================
+
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+// Make sure videos and embeds fit their containers
+embed,
+iframe,
+object,
+video {
+    max-width: 100%;
+}

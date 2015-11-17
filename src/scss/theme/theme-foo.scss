@@ -1,0 +1,15 @@
+$themes: (
+    red: red,
+    blue: blue,
+    black: black
+);
+
+@each $theme, $bgcolor in $themes {
+    .theme--#{$theme} {
+        background: $bgcolor;
+    }
+}
+
+// Include Project styles
+// =============================================================================
+@import "../base";

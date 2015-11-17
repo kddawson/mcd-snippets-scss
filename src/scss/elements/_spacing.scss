@@ -1,0 +1,43 @@
+// =============================================================================
+// Spacing classes
+//
+// Add or override margin / padding to any element
+//
+// =============================================================================
+
+
+@each $key, $value in $positions {
+    // margin classes (e.g. .mt0, .mtF, .mtH, .mtQ)
+    .m#{$key}0 {
+        margin-#{$value}: 0;
+    }
+
+    .m#{$key}F {
+        margin-#{$value}: $spacing;
+    }
+
+    .m#{$key}H {
+        margin-#{$value}: $h-space;
+    }
+
+    .m#{$key}Q {
+        margin-#{$value}: $q-space;
+    }
+
+    // padding classes (e.g. .pt0, .ptF, .ptH, .ptQ)
+    .p#{$key}0 {
+        padding-#{$value}: 0;
+    }
+
+    .p#{$key}F {
+        padding-#{$value}: $spacing;
+    }
+
+    .p#{$key}H {
+        padding-#{$value}: $h-space;
+    }
+
+    .p#{$key}Q {
+        padding-#{$value}: $q-space;
+    }
+}

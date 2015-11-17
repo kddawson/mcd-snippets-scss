@@ -1,0 +1,230 @@
+// =============================================================================
+// Miscellaneous helpers
+//
+// =============================================================================
+
+
+/// Micro clearfix. Also available as class `cf`.
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/
+
+@mixin cf {
+
+    &::before,
+    &::after {
+        content: " ";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+.cf {
+    @include cf;
+}
+
+
+/// Visually hide an element. Also available as class `vis-hide`.
+
+@mixin vis-hide {
+    overflow: hidden;
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+}
+
+.vis-hide {
+    @include vis-hide;
+}
+
+
+/// Fully hide an element including from AT. Also available as class `full-hide`.
+
+@mixin full-hide {
+    display: none !important;
+    visibility: hidden;
+}
+
+.full-hide {
+    @include full-hide;
+}
+
+
+/// Disable user-select of an element. Prevents undesirable visual effect when accidently selecting text.
+/// @group typography
+
+%user-select {
+    -webkit-touch-callout: none;
+    user-select: none;
+    outline: none;
+    white-space: nowrap;
+}
+
+
+/// Truncate text with an ellipsis if content is too long for parent container.
+/// Also set width and perhaps some padding. Beware, unwanted effect of shortening to a word with different meaning!
+/// @group typography
+
+%text-overflow-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/// Hyphenate content that is too long for parent container.
+/// Safer than ellipsis.
+/// @group typography
+
+%hyphenate {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+
+/// Convert supplied pixel size to rems.
+/// @group typography
+/// @access public
+///
+/// @requires {variable} $base-font-size
+/// @param {number} $target-px-size
+/// @example scss
+///     .example {
+///         @include font-size-rems(24);
+///     }
+///
+/// @example css
+///     .example {
+///         font-size: 24px;
+///         font-size: 1.5rem;
+///     }
+///
+
+@mixin font-size-rems($target-px-size) {
+    $rem-size: $target-px-size / $base-font-size;
+    font-size: $target-px-size * 1px;
+    font-size: $rem-size * 1rem;
+}
+
+
+/// Specify the dimensions of an object more easily.
+/// @group dimensions and position
+/// @access public
+///
+/// @param {number} $width - include a unit
+/// @param {number} $height - include a unit
+/// @example scss
+///     .example {
+///         @include size(24px, 30px);
+///     }
+///
+/// @example css
+///     .example {
+///         width: 24px;
+///         height: 30px;
+///     }
+///
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+
+/// Specify the dimensions of a square object more easily.
+/// @group dimensions and position
+/// @access public
+///
+/// @requires {mixin} size
+/// @param {number} $size  - include a unit
+/// @example scss
+///     .example {
+///         @include square(24px);
+///     }
+///
+/// @example css
+///     .example {
+///         width: 24px;
+///         height: 24px;
+///     }
+///
+
+@mixin square($size) {
+    @include size($size, $size);
+}
+
+
+/// Center a block of unknown dimensions inside another block of unknown dimensions.
+/// @group dimensions and position
+/// @access public
+///
+/// @link http://css-tricks.com/centering-in-the-unknown/
+/// @example scss
+///     .outer-block {
+///         @include ghostVAlign;
+///
+///         .inner {
+///             display: inline-block;
+///             vertical-align: middle;
+///         }
+///     }
+///
+
+@mixin ghostVAlign {
+
+    &::before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        @include size(0.1px, 100%);
+    }
+}
+
+
+/// Vertical-align: middle (by default) child blocks of content.
+/// Override on the child with `.valign--top` or `.valign--bottom`.
+/// @group dimensions and position
+/// @access public
+///
+/// @example scss
+///     .outer-block {
+///         @include v-align;
+///     }
+///
+/// @example css
+///     .outer-block {
+///         display: table;
+///     }
+///
+///     .outer-block > * {
+///         display: table-cell;
+///         vertical-align: middle;
+///     }
+///
+
+@mixin v-align {
+    display: table;
+
+    > * {
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+.v-align {
+    @include v-align;
+}
+
+.valign--top {
+    vertical-align: top;
+}
+
+.valign--bottom {
+    vertical-align: bottom;
+}
