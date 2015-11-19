@@ -6,6 +6,7 @@
     <title>Soup o' Snippets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="dist/css/theme/theme-foo.min.css">
 </head>
 <body>
@@ -120,14 +121,14 @@
                     </ul>
                     <section id="default">
                         <h2>Default Form (inline labels)</h2>
-                        <form action="/">
+                        <form id="defaultForm" method="get" action novalidate="novalidate">
                             <fieldset>
                                 <legend>Default Form</legend>
                                 <label for="input">label</label>
                                 <input type="text" id="input" aria-describedby="aria" value="">
                                 <div id="aria" role="tooltip">Tooltip help</div>
-                                <label for="input2">another label</label>
-                                <input type="email" id="input2" placeholder="email address" value="">
+                                <label for="email">another label</label>
+                                <input type="email" id="email" name="email" placeholder="email address" value="" required="required" aria-required="true">
                                 <label for="option1"><input type="checkbox" id="option1">A checkbox</label>
                             </fieldset>
                             <fieldset>
@@ -166,7 +167,7 @@
                                 </label>
                             </fieldset>
                             <div class="controls">
-                                <button type="button" class="btn btn--primary">
+                                <button type="submit" class="btn btn--primary">
                                     <span class="btn__label">Submit</span>
                                 </button>
                             </div>
@@ -348,15 +349,16 @@
                             </div>
                         </div>
                         <h2>Box reveal</h2>
-                        <div class="box-reveal">
-                            <a href="">
-                                <h2 class="box-reveal__title"></h2>
+                        <p>Note: As this is in a hidden tab on page load, the JS won't have calculated <code>outerHeight</code> yet. Hover over / off the box to kick it off.</p>
+                        <div class="box-reveal shadow--16dp">
+                            <a href="#" class="box-reveal__anchor">
+                                <h2 class="box-reveal__title no-img-bg">Title</h2>
                                 <div class="box-reveal__img">
-                                    <div class="box-reveal__img-bg"></div>
+                                    <div class="box-reveal__img-bg" style="background-image:url('http://lorempixel.com/600/600/')"></div>
                                     <div class="box-reveal__tint"></div>
-                                    <img src="" alt="">
+                                    <!-- <img src="path/to/transparent/img" alt=""> -->
                                 </div>
-                                <div class="box-reveal__content"></div>
+                                <div class="box-reveal__content">Content area to reveal on hover</div>
                             </a>
                         </div>
                     </section>
@@ -389,6 +391,19 @@
 
                     // jQueryUI datepicker
                     //$(".datepicker").datepicker();
+
+                    // jQuery Validate
+                    $("#defaultForm").validate({
+                        rules: {
+                            email: {
+                                required: true,
+                                email: true
+                            },
+                        },
+                        messages: {
+                            email: "Please provide a valid email address",
+                        }
+                    });
                 });
             }(jQuery));
         };

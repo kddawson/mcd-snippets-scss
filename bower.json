@@ -20,5 +20,8 @@
     "SpinKit": "spinkit#~1.2.2",
     "perfect-scrollbar": "~0.6.7",
     "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js"
+  },
+  "devDependencies": {
+    "jquery-validation": "~1.14.0"
   }
 }

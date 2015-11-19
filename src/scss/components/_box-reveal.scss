@@ -4,11 +4,14 @@
 // Overlay a transparent img on a bg image and reveal a content box on hover
 //
 // HTML Emmet pattern
-// div.box-reveal>a>h2.box-reveal__title+div.box-reveal__img>div.box-reveal__img-bg+div.box-reveal__tint+img^div.box-reveal__content
+// div.box-reveal>a.box-reveal__anchor>h2.box-reveal__title+div.box-reveal__img>div.box-reveal__img-bg+div.box-reveal__tint+img^div.box-reveal__content
+//
+// a.box-reveal__anchor: Only if the whole box is to be a link to further content
 //
 // =============================================================================
 
 
+$boxreveal-width: 262px;
 $boxreveal-height: 262px;
 
 
@@ -16,6 +19,7 @@ $boxreveal-height: 262px;
     position: relative;
     overflow: hidden;
     margin: 1em 0;
+    width: $boxreveal-width;
     min-height: $boxreveal-height;
     height: $boxreveal-height;
 
@@ -33,15 +37,24 @@ $boxreveal-height: 262px;
             top: 40%;
         }
     }
+
+    // If the whole box is to be a link to further content
+    .box-reveal__anchor {
+        display: block;
+        height: 100%;
+    }
 }
 
 .box-reveal__title {
 
-    &.no-logo {
+    &.no-img-bg {
         position: absolute;
-        top: 15px;
-        left: 15px;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        margin: 0;
         color: #fff;
+        transform: translate(-50%, -50%);
     }
 }
 
@@ -49,8 +62,8 @@ $boxreveal-height: 262px;
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 15px;
-    right: 15px;
+    left: 0;
+    right: 0;
 
     > img {
         display: block;
@@ -84,9 +97,10 @@ $boxreveal-height: 262px;
 
 .box-reveal__content {
     position: absolute;
-    left: 15px;
-    right: 15px;
+    left: 0;
+    right: 0;
     z-index: 2;
+    box-sizing: border-box;
     padding: 15px;
     color: #fff;
     background-color: #000;
