@@ -1,0 +1,219 @@
+// =============================================================================
+// Vertical Timeline
+//
+// HTML Emmet pattern:
+// ol.timeline-vertical>li.timeline__item>div.timeline__item-body>div.timeline__item-entry>div.timeline__item-icon+div.timeline__item-content>h3.timeline__item-title+div.timeline__item-text>span.timeline__item-name+span.timeline__item-date
+//
+// Note: Optional .icon to indicate an activity/event type
+//
+// =============================================================================
+
+
+$gray-light:            tint(#000, 60%);
+$gray-lighter:          tint(#000, 93.5%);
+$reverse:               #dcdcdc;
+$text-color:            #404040;
+$border-radius-base:    4px;
+
+
+.timeline-vertical {
+    position: relative;
+    display: table;
+    table-layout: fixed; // ensure same width
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 30px;
+        bottom: 0;
+        left: 5px;
+        z-index: 0;
+        width: 1px;
+        background-color: shade($gray-lighter, 10%);
+
+        @include mq(m-land) {
+            left: 50%;
+        }
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        @include square(16px);
+        background-color: $gray-lighter;
+        border: 1px solid shade($gray-lighter, 10%);
+        border-radius: 50%;
+
+        @include mq(m-land) {
+            left: calc("50% - 8px");
+        }
+    }
+}
+
+.timeline__item {
+    display: table-row;
+
+    &::before {
+        display: none;
+        content: "";
+
+        @include mq(m-land) {
+            display: block;
+            width: 50%;
+        }
+    }
+
+    &:nth-child(even) {
+
+        @include mq(m-land) {
+            text-align: left;
+
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                content: "";
+                display: block;
+                width: 50%;
+            }
+        }
+    }
+}
+
+.timeline__item-body {
+    display: table-cell;
+    padding-bottom: 15px;
+    width: 50%;
+    vertical-align: top;
+}
+
+.timeline__item-entry {
+    position: relative;
+    margin: 0 0 15px 55px;
+
+    .timeline__item:nth-child(even) & {
+
+        @include mq(m-land) {
+            margin: 0 55px 15px 0;
+        }
+    }
+}
+
+.timeline__item-icon {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: -65px;
+    @include square(33px);
+    color: $text-color;
+    background-color: transparent;
+    text-align: center;
+
+    @include mq(m-land) {
+        left: -86px;
+        @include square(66px);
+    }
+
+    .timeline__item:nth-child(even) & {
+
+        @include mq(m-land) {
+            left: auto;
+            right: -90px;
+        }
+    }
+
+    .icon {
+        top: auto;
+        bottom: 10px;
+        right: -18px;
+    }
+
+    img {
+        @include square(32px);
+        border-radius: 50%;
+
+        @include mq(m-land) {
+            @include square(66px);
+        }
+    }
+}
+
+.timeline__item-content {
+    position: relative;
+    padding: 15px;
+    background : linear-gradient(0, rgba(237, 237, 237, 1) 0, rgba(255, 255, 255, 1) 100%);
+    border-radius: $border-radius-base;
+    border: 1px solid $reverse;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: -16px;
+        top: 15px;
+        border: 8px solid transparent;
+        border-right: 8px solid #fff;
+        line-height: 0;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -15px;
+        top: 16px;
+        border: 7px solid transparent;
+        border-right: 7px solid #666;
+        line-height: 0;
+    }
+
+    .timeline__item:nth-child(even) & {
+
+        @include mq(m-land) {
+            &::after {
+                left: auto;
+                right: -16px;
+                border: 8px solid transparent;
+                border-left: 8px solid #fff;
+            }
+
+            &::before {
+                left: auto;
+                right: -16px;
+                top: 15px;
+                border: 8px solid transparent;
+                border-left: 8px solid #666;
+            }
+        }
+    }
+}
+
+.timeline__item-title {
+    margin-top: 0;
+    @include font-size-rems(18);
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.timeline__item-actions-pending {
+    padding-bottom: 15px;
+}
+
+.timeline__item-text {
+     margin-bottom: 0;
+}
+
+.timeline__item-name {
+    color: $text-color;
+    @include font-size-rems(12);
+}
+
+.timeline__item-date {
+    @include font-size-rems(12);
+}
