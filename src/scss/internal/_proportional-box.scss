@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// Proportional box
+// By Ann Tudor: http://codepen.io/thebabydino/pen/MajxzY
+//
+// HTML Emmet pattern
+// div.prop-box
+//
+// -----------------------------------------------------------------------------
+
+
+/// Proportional box sizing.
+/// @group dimensions and position
+/// @access public
+///
+/// @param {Number} $a - aspect ratio
+/// @param {Number} $b - aspect ratio
+/// @example scss
+///   .example {
+///     @include proportional-box(4, 3);
+///   }
+///
+/// @example css
+///   .example {
+///     position: absolute;
+///     top: 0;
+///     left: calc(50vw - 66.66667vh);
+///     width: 133.33333vh;
+///     height: 100vh;
+///   }
+///
+///   @media (max-aspect-ratio: 4 / 3) {
+///     .example {
+///       top: calc(50vh - 37.5vw);
+///       left: 0;
+///       width: 100vw;
+///       height: 75vw;
+///     }
+///   }
+///
+
+
+@mixin proportional-box($a: 1, $b: $a) {
+    position: absolute;
+    top: 0;
+    left: calc(50vw - #{$a/$b/2*100vh});
+    width: $a/$b*100vh;
+    height: 100vh;
+
+    @media (max-aspect-ratio: #{$a}/#{$b}) {
+        top: calc(50vh - #{$b/$a/2*100vw});
+        left: 0;
+        width: 100vw;
+        height: $b/$a*100vw;
+    }
+}
