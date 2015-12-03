@@ -19,7 +19,8 @@
     "normalize-css": "normalize.css#~3.0.3",
     "SpinKit": "spinkit#~1.2.2",
     "perfect-scrollbar": "~0.6.7",
-    "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js"
+    "jquery-2.1.4.min": "http://code.jquery.com/jquery-2.1.4.min.js",
+    "animate.css": "~3.4.0"
   },
   "devDependencies": {
     "jquery-validation": "~1.14.0"
