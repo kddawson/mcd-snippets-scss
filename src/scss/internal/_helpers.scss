@@ -228,3 +228,10 @@
 .valign--bottom {
     vertical-align: bottom;
 }
+
+// https://dev.opera.com/articles/css-will-change-property/
+%hardware-acceleration {
+    transform: translateZ(0);
+    // set and unset using JS animationEnd
+    will-change: transform;
+}
