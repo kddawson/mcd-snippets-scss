@@ -7,13 +7,13 @@
 // =============================================================================
 
 
-.center-transform-parent {
+.parent {
     position: relative;
     // some width;
     // some height;
 }
 
-.center-transform__child {
+.center__child {
     position: absolute;
 
     // Dead center
@@ -39,4 +39,22 @@
         margin-bottom: auto;
         transform: translateY(-50%);
     }
+}
+
+// Alternative solution (if no animations are involved)
+$width: 2em;
+$height: 2em;
+
+.parent {
+    position: relative;
+    // some width;
+    // some height;
+}
+
+.child {
+    position: absolute;
+    top: calc(50% - #{0.5*$height});
+    left: calc(50% - #{0.5*$width});
+    width: $width;
+    height: $height;
 }
