@@ -38,13 +38,27 @@
 ///     }
 ///
 
+// If IE8 support needed, override this variable in old-ie.scss with one breakpoint value (no units)
+// eg $fix-mqs: 768;
+// See: https://jakearchibald.github.io/sass-ie/
+$fix-mqs: false !default;
+
 
 @mixin mq($breakpoint, $query1: min, $query2: width) {
     @if map-has-key($breakpoints, $breakpoint) {
         $value: map-get($breakpoints, $breakpoint);
 
-        @media screen and (#{$query1}-#{$query2}: $value / $base-font-size +em) {
+        @if $fix-mqs {
+            // If we've set a value for old IE
+            @if $fix-mqs >= $value {
+                // ...output the content the scss gave us.
+                @content;
+            }
+        }
+        @else {
+          @media screen and (#{$query1}-#{$query2}: $value / $base-font-size +em) {
             @content;
+          }
         }
     } @else {
         @warn "The key `#{$breakpoint}` is not available in the `$breakpoints` map";

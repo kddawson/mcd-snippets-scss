@@ -1,0 +1,19 @@
+// CSS for IE8
+// See: https://jakearchibald.github.io/sass-ie/
+
+$themes: (
+    red: red,
+    blue: blue,
+    black: black
+);
+
+@each $theme, $bgcolor in $themes {
+    .theme--#{$theme} {
+        background: $bgcolor;
+    }
+}
+
+// Include Project styles
+// =============================================================================
+$fix-mqs: 768;
+@import "../base";
