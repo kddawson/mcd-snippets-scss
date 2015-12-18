@@ -1,0 +1,132 @@
+// =============================================================================
+// Radio button using Material Design
+//
+// HTML Emmet pattern
+// label.md-radio.has--add-text>input[type=radio][name=radItem].md-radio__input+span.md-radio__custom>span.md-radio__custom-inner^div.md-radio__label-text{label text}>small.md-radio__add-text{optional help text}
+// Add .with--error to label
+//
+// =============================================================================
+
+
+// Settings
+$radio-inner-size       : 16px;
+$radio-outer-size       : 24px;
+
+$radio-font-size        : 18px;
+
+$radio-text-color       : #5b5b5b;
+$radio-inactive-color   : lighten(#b2b2b2, 10);
+$radio-active-color     : #2196f3;
+$radio-inner-color      : #fff;
+$radio-error-color      : #d32f2f;
+
+$radio-transition       : all 0.25s ease-in-out;
+
+
+.md-radio {
+    position: relative;
+    display: inline-block;
+    font-size: $radio-font-size;
+    line-height: 2 * $radio-outer-size - 2;
+    cursor: pointer;
+
+    &:hover {
+
+        .md-radio__custom-inner {
+            transform: scale(0.5);
+            opacity: 0.5;
+        }
+    }
+
+    &__input {
+        @include square(1px);
+        border: none;
+        transition: none;
+        opacity: 0;
+
+        &:checked + .md-radio__custom {
+            border-color: $radio-active-color;
+            transform: scale(1);
+
+            .md-radio__custom-inner {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        &:focus + .md-radio__custom {
+
+            .md-radio__custom-inner {
+                background-color: darken($radio-active-color, 10);
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    // Native input control and checked events
+    // Outer ring of custom radio
+    &__custom {
+        position: relative;
+        display: block;
+        float: left;
+        clear: left;
+        margin: 8px;
+        @include square($radio-outer-size);
+        background-color: $radio-inner-color;
+        border: 3px solid $radio-inactive-color;
+        border-radius: 50%;
+        transition: $radio-transition;
+        transform: scale(0.75);
+
+        // Inner ring of custom radio
+        &-inner {
+            @include square($radio-inner-size);
+            display: block;
+            margin: ($radio-outer-size - $radio-inner-size) / 2;
+            background-color: $radio-active-color;
+            border-radius: 50%;
+            transition: $radio-transition;
+            transform: scale(0);
+            opacity: 0;
+        }
+    }
+
+    // basic text label & text wrapper
+    &__label-text {
+        display: inline-block;
+        line-height: ($radio-font-size / $base-font-size) / 1px;
+    }
+
+    // if has additional text
+    &.has--add-text {
+
+        .md-radio__label-text {
+            padding-top: $radio-font-size / 2 - 2;
+        }
+
+        .md-radio__add-text {
+            display: block;
+            padding-top: 2px;
+            color: $radio-text-color;
+            line-height: 1;
+        }
+    }
+
+    // error class added
+    &.with--error {
+
+        .md-radio__label-text,
+        .md-radio__add-text {
+            color: $radio-error-color;
+        }
+
+        .md-radio__custom {
+            border-color: $radio-error-color !important;
+
+            .md-radio__custom-inner {
+                background-color: $radio-error-color !important;
+            }
+        }
+    }
+}
