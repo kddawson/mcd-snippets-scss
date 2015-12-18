@@ -17,7 +17,7 @@
  */
 
 
- if (jQuery) {
+if (jQuery) {
     (function ($) {
         "use strict";
         $.fn.collapsible = function(collapsed){
