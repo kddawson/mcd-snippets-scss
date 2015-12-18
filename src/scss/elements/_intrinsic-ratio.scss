@@ -1,0 +1,47 @@
+// =============================================================================
+// Intrinsic ratio
+// See: http://daverupert.com/2015/12/intrinsic-placeholders-with-picture/
+//
+// HTML Emmet pattern
+// picture.intrinsic-container.intrinsic--square>source[media=""][srcset=""]+img[srcset=""][alt=""].intrinsic-item
+//
+// =============================================================================
+
+
+.intrinsic-container {
+
+    // Make sure <picture> wrapper is set to block
+    display: block;
+    // Max-width is governed by parentNode
+
+    // Intrinsic Ratio Box
+    position: relative;
+    padding-top: 100%; // Default to square
+    width: 100%;
+    height: 0;
+
+    // Custom Styling
+    background: #f0f0f0;
+
+    // Add as many ratios as you'd like...
+    &.intrinsic--square {
+        padding-top: 100%;
+    }
+
+    &.intrinsic--4x3 {
+        padding-top: 75%;
+    }
+
+    &.intrinsic--16x9 {
+        padding-top: 56.25%;
+    }
+
+    // Force the item to fill the intrinsic box
+    .intrinsic-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
