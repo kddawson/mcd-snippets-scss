@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------
  * ARIA-enhanced navbar
- * Use with less/components/navbar.less
+ * Use with scss/components/_navbar.scss
  *
  * --------------------------------------------------------------------
  */

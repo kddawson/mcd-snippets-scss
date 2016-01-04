@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------
  * Flyout panel
- * Use with less/components/panel-flyout.less
+ * Use with scss/components/_panel-flyout.scss
  *
  * --------------------------------------------------------------------
  */
