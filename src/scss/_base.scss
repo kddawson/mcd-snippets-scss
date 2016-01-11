@@ -17,6 +17,9 @@
 
 
 // Elements
+@import "elements/spacing";
+@import "elements/shadows";
+@import "elements/mdl-ripple";
 @import "elements/buttons";
 @import "elements/form-checkbox-radio";
 @import "elements/form-radio-md";
@@ -28,8 +31,6 @@
 @import "elements/icons";
 @import "elements/responsive-media";
 @import "elements/skip-nav";
-@import "elements/spacing";
-@import "elements/shadows";
 
 
 // Components
