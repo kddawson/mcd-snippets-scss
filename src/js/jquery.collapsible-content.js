@@ -11,7 +11,7 @@
  * Modified CSS & ARIA support, Karl Dawson June 2014
  * Attach: $('.jsCollapsible').collapsible();
  * Opens next sibling container by default
- * Use with less/components/accessible-content-toggle.less
+ * Use with scss/components/accessible-content-toggle.scss
  *
  * --------------------------------------------------------------------
  */

@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------
  * JS-enhanced file upload
- * Use with less/elements/form-file-upload.less
+ * Use with scss/elements/form-file-upload.scss
  *
  * --------------------------------------------------------------------
  */

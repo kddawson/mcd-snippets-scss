@@ -3,7 +3,7 @@
  * Accessible Tabs
  * See: http://heydonworks.com/practical_aria_examples/#progressive-collapsibles
  * Alt: https://github.com/mpiotrowicz/a11y-sandbox/blob/active-focus/source/javascripts/prototypes/responsive-tabs.js
- * Use with less/components/accessible-tabs.less
+ * Use with scss/components/accessible-tabs.scss
  *
  * --------------------------------------------------------------------
  */
