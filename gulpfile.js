@@ -17,6 +17,23 @@ var del         = require('del'),
 // folder vars
 var dest        = './dist';
 var src         = './src';
+var bootstrapPath   = './bower_components/bootstrap-sass/assets';
+
+
+// Include Bootstrap files
+// 1. Amend _bootstrap.scss to use the copied version of _variables.scss
+// 2. Amend _bootstrap.scss to use on what's needed
+// =============================================================================
+gulp.task('bootstrap', ['bootstrapJS'], function () {
+    return gulp.src([
+        bootstrapPath + '/stylesheets/bootstrap/_variables.scss',
+        bootstrapPath + '/stylesheets/_bootstrap.scss'
+    ])
+    .pipe(gulp.dest(src + '/scss/third-party'))
+    .pipe(plugins.notify({
+        message: 'Bootstrap done', onLast: true
+    }));
+});
 
 
 // Compile & Minify CSS from Sass files
@@ -39,7 +56,9 @@ gulp.task('css', function () {
         errorHandler: onError
     }))
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.sass())
+    .pipe(plugins.sass({
+        includePaths: [bootstrapPath + '/stylesheets']
+    }))
     .pipe(plugins.autoprefixer({
         // Add versions according to project's browser support matrix
         // See: https://github.com/ai/browserslist#queries
@@ -52,11 +71,7 @@ gulp.task('css', function () {
         ]
     }))
     .pipe(gulp.dest(dest + '/css'))
-    .pipe(plugins.minifyCss({
-        keepSpecialComments: 0,
-        keepBreaks: false,
-        compatibility: '*,' + '-units.pc,' + '-units.pt,' + '-units.in' // until this 'optimisation' is removed
-    }))
+    .pipe(plugins.cssnano())
     .pipe(plugins.rename({
         suffix: '.min'
     }))
@@ -80,6 +95,39 @@ gulp.task('js', function () {
     .pipe(gulp.dest(dest + '/js'))
     .pipe(plugins.notify({
         message: 'JS task complete', onLast: true
+    }));
+});
+
+
+// Concatenate & Minify Bootstrap JS
+// bootstrap-popover.js has to be after bootstrap-tooltip.js
+// Only use what's needed
+// =============================================================================
+gulp.task('bootstrapJS', function () {
+    return gulp.src([
+        // bootstrapPath + '/javascripts/bootstrap.js'
+        bootstrapPath + '/javascripts/bootstrap/transition.js',
+        bootstrapPath + '/javascripts/bootstrap/alert.js',
+        bootstrapPath + '/javascripts/bootstrap/button.js',
+        bootstrapPath + '/javascripts/bootstrap/carousel.js',
+        bootstrapPath + '/javascripts/bootstrap/collapse.js',
+        bootstrapPath + '/javascripts/bootstrap/dropdown.js',
+        bootstrapPath + '/javascripts/bootstrap/modal.js',
+        bootstrapPath + '/javascripts/bootstrap/tooltip.js',
+        bootstrapPath + '/javascripts/bootstrap/popover.js',
+        bootstrapPath + '/javascripts/bootstrap/scrollspy.js',
+        bootstrapPath + '/javascripts/bootstrap/tab.js',
+        bootstrapPath + '/javascripts/bootstrap/affix.js'
+    ])
+    .pipe(plugins.concat('bootstrap.js'))
+    .pipe(gulp.dest(dest + '/js'))
+    .pipe(plugins.rename({
+        suffix: '.min'
+    }))
+    .pipe(plugins.uglify())
+    .pipe(gulp.dest(dest + '/js'))
+    .pipe(plugins.notify({
+        message: 'Bootstrap JS task complete', onLast: true
     }));
 });
 
@@ -193,5 +241,5 @@ gulp.task('docs', function () {
 // Default Task
 // =============================================================================
 gulp.task('default', ['clean'], function() {
-    gulp.start('css', 'js', 'jsLibs', 'images', 'svg2png', 'fonts', 'docs', 'serve');
+    gulp.start('bootstrap', 'css', 'js', 'jsLibs', 'images', 'svg2png', 'fonts', 'docs', 'serve');
 });
