@@ -193,7 +193,7 @@ gulp.task('serve', ['watch'], function () {
     });
 
     gulp.watch('*.html').on('change', reload);
-    gulp.watch(dest + '/css/*.css', reload);
+    gulp.watch(dest + '/css/**/*.css').on('change', reload);
 });
 
 // Watch for changes in files
