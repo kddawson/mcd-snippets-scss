@@ -138,7 +138,7 @@ gulp.task('jsLibs', function () {
     return gulp.src(src + '/js/libs/**/*.js', {
         base: 'src'
     })
-    .pipe(gulp.dest(dest + '/js/libs'))
+    .pipe(gulp.dest(dest))
     .pipe(plugins.notify({
         message: 'JS libraries copied to dist', onLast: true
     }));
@@ -230,7 +230,7 @@ gulp.task('clean', function(cb) {
 // Documents SCSS variables, functions & mixins
 // =============================================================================
 gulp.task('docs', function () {
-  return gulp.src(src + '/scss/**/*.scss')
+    return gulp.src(src + '/scss/**/*.scss')
     .pipe(sassdoc())
     .pipe(plugins.notify({
         message: 'Documentation updated', onLast: true
