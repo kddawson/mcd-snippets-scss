@@ -229,6 +229,31 @@
     vertical-align: bottom;
 }
 
+
+/// Vertical-align: absolute center a child block of content using Flexbox.
+/// @group dimensions and position
+/// @access public
+///
+/// @example scss
+///     .parent {
+///         @extend .flex-centered;
+///     }
+///
+/// @example css
+///     .parent {
+///         display: flex;
+///         justify-content: center;
+///         align-items: center;
+///     }
+///
+
+%flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 // https://dev.opera.com/articles/css-will-change-property/
 %hardware-acceleration {
     transform: translateZ(0);
