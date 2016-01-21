@@ -9,6 +9,7 @@
 
 .parent {
     position: relative;
+    transform-style: preserve-3d; // prevent "half pixel" blurring
     // some width;
     // some height;
 }
