@@ -240,6 +240,6 @@ gulp.task('docs', function () {
 
 // Default Task
 // =============================================================================
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
     gulp.start('bootstrap', 'css', 'js', 'jsLibs', 'images', 'svg2png', 'fonts', 'docs', 'serve');
 });
