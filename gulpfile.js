@@ -1,4 +1,3 @@
-/// <binding AfterBuild='default' ProjectOpened='serve' />
 // Include Gulp
 var gulp = require('gulp');
 
