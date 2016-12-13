@@ -1,0 +1,271 @@
+// =============================================================================
+// Accessible Custom Select Box
+// See: https://github.com/gfranko/jquery.selectBoxIt.js
+// Requires jQuery UI Widget factory
+// Attach with $("select").selectBoxIt();
+//
+// =============================================================================
+
+// Settings
+$selectbox-width: 300px;
+$selectbox-height: 30px;
+$selectbox-border-radius: 4px;
+$selectbox-textindent: 4px;
+$selectbox-bgcolor: #fff;
+$selectbox-color: #f00;
+
+// Common CSS Properties
+// These properties will be applied to any theme applied
+// =============================================================================
+
+// SelectBoxIt container
+.selectboxit-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+
+    * {
+        @extend %user-select;
+    }
+
+    .selectboxit {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        width: $selectbox-width;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &.selectboxit-disabled {
+            box-shadow: none;
+            opacity: 0.65;
+            cursor: default;
+        }
+
+        .selectboxit-option-icon-container {
+            margin-left: 5px;
+        }
+    }
+
+    span {
+        display: block;
+        height: $selectbox-height;
+        line-height: $selectbox-height;
+    }
+
+    // Options list
+    .selectboxit-options {
+        position: absolute;
+        z-index: 5000;
+        display: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        min-width: 100%;  /* Minimum Width of the dropdown list box options */
+        *width: 100%;
+        border-radius: $selectbox-border-radius;
+        box-shadow: none;
+        text-align: left;
+        cursor: pointer;
+
+        a {
+            display: block;
+            height: $selectbox-height;
+            line-height: $selectbox-height;
+        }
+
+        .selectboxit-disabled {
+            box-shadow: none;
+            opacity: 0.65;
+            cursor: default;
+        }
+    }
+
+    .selectboxit-option-icon {
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+    }
+}
+
+// Button text
+.selectboxit-text {
+    float: left;
+    overflow: hidden;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+}
+
+// Individual options
+ .selectboxit-option {
+    list-style-type: none;
+    margin: 0;
+    text-indent: $selectbox-textindent;
+
+    .selectboxit-option-anchor {
+        padding: 0 2px;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.selectboxit-optgroup-header {
+    list-style-type: none;
+    margin: 0;
+    text-indent: $selectbox-textindent;
+}
+
+// The first dropdown option
+.selectboxit-option-first {
+    border-top-right-radius: $selectbox-border-radius;
+    border-top-left-radius: $selectbox-border-radius;
+}
+
+.selectboxit-optgroup-header {
+    font-weight: 700;
+
+    &:hover {
+        cursor: default;
+    }
+
+    // The first dropdown option optgroup
+    + .selectboxit-option-first {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+}
+
+// The last dropdown option
+.selectboxit-option-last {
+    border-bottom-right-radius: $selectbox-border-radius;
+    border-bottom-left-radius: $selectbox-border-radius;
+}
+
+// Dropdown down arrow container
+.selectboxit-arrow-container {
+    position: absolute;
+    right: 0;
+    width: 30px;
+
+    .selectboxit-arrow {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        transform: translateY(-50%);
+    }
+
+    // Dropdown down arrow for jQueryUI and jQuery Mobile
+    .selectboxit-arrow.ui-icon {
+        top: 30%;
+    }
+}
+
+// Dropdown individual option icon positioning
+.selectboxit-option-icon-container {
+    float: left;
+}
+
+// Dropdown individual option icon positioning
+.selectboxit-option-icon-url {
+    float: left;
+    width: 18px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px 18px;
+}
+
+.selectboxit-rendering {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    display: inline-block !important;
+    *display: inline !important;
+    zoom: 1 !important;
+    visibility: visible !important;
+}
+
+
+// jQueryUI and jQuery Mobile compatability fixes
+// Remove if not using jQuery Mobile
+// =============================================================================
+.jqueryui {
+
+    .ui-icon {
+        background-color: inherit;
+    }
+
+    .ui-icon-triangle-1-s {
+        background-position: -64px -16px;
+    }
+}
+
+
+// Default Theme
+// =============================================================================
+.selectboxit-btn {
+    background-color: $selectbox-bgcolor;
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+
+    &.selectboxit-enabled:hover,
+    &.selectboxit-btn.selectboxit-enabled:focus,
+    &.selectboxit-btn.selectboxit-enabled:active {
+        color: $selectbox-color;
+        background-color: #e6e6e6;
+    }
+}
+
+.selectboxit-default-arrow {
+    // width: 0;
+    // height: 0;
+    // border-top: 4px solid #000;
+    // border-right: 4px solid transparent;
+    // border-left: 4px solid transparent;
+    @include triangle(down, 4px, #000);
+}
+
+.selectboxit-list {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    .selectboxit-option-anchor {
+        color: #333;
+    }
+
+    > .selectboxit-focus {
+
+        > .selectboxit-option-anchor {
+            color: #fff;
+            background-color: #0081c2;
+            background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+            background-repeat: repeat-x;
+        }
+    }
+
+    > .selectboxit-disabled {
+
+        > .selectboxit-option-anchor {
+            color: #999;
+        }
+    }
+}
